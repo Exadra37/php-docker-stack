@@ -1,0 +1,51 @@
+version: "2"
+
+services:
+  nginx:
+    build: ./build/nginx/${NGINX_VERSION}
+    ports:
+      - 8080:80
+    links:
+      - php
+    volumes_from:
+      - app
+    networks:
+      - appnet
+
+  php:
+    build: ./build/php/${PHP_VERSION}
+    expose:
+      - 9000
+    links:
+      - mysql
+    volumes_from:
+      - app
+    networks:
+      - appnet
+
+  app:
+    image: tianon/true
+    volumes:
+      - ./:/var/www
+    networks:
+      - appnet
+
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - appnet
+
+networks:
+  appnet:
+    driver: "bridge"
+
+volumes:
+  data:
+    driver: "local"
