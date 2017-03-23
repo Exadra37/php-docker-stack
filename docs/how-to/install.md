@@ -1,0 +1,3 @@
+# HOW TO INSTALL
+
+Detailed instructions here...

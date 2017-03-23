@@ -1,0 +1,3 @@
+# HOW TO UNINSTALL
+
+Detailed instructions here...

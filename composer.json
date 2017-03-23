@@ -1,0 +1,17 @@
+{
+    "name": "exadra37-docker-compose/laravel5",
+    "description": "All my repositories will have this one as starting point.",
+    "keywords": [
+        "Exadra37"
+    ],
+    "homepage": "https://gitlab.com/exadra37-docker-compose/laravel5",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Paulo Silva",
+            "email": "exadra37@gmail.com",
+            "homepage": "https://exadra37.com",
+            "role": "Software Developer"
+        }
+    ]
+}
