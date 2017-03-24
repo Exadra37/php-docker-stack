@@ -1,10 +1,10 @@
 version: "2"
 
 services:
-  nginx:
-    build: ./build/nginx/${NGINX_VERSION}
+  web:
+    build: ./build/${WEB_SERVER}/${WEB_SERVER_VERSION}
     ports:
-      - 8080:80
+      - ${WEB_SERVER_HOST_PORT}:80
     links:
       - php
     volumes_from:
@@ -17,7 +17,7 @@ services:
     expose:
       - 9000
     links:
-      - mysql
+      - database
     volumes_from:
       - app
     networks:
@@ -26,14 +26,14 @@ services:
   app:
     image: tianon/true
     volumes:
-      - ./:/var/www
+      - ./:${APP_CONTAINER_DIR}
     networks:
       - appnet
 
-  mysql:
-    image: mysql:${MYSQL_VERSION}
+  database:
+    image: ${DB_SERVER}:${DB_SERVER_VERSION}
     volumes:
-      - data:/var/lib/mysql
+      - data:${DB_SERVER_CONTAINER_WORK_DIR}
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}

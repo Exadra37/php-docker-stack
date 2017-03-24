@@ -1,6 +1,6 @@
 <?php
 
-$connection = new PDO("mysql:host=mysql;dbname=docker_laravel;charset=utf8", 'docker_laravel', 'docker_secret');
+$connection = new PDO("mysql:host=database;dbname=docker_laravel;charset=utf8", 'docker_laravel', 'docker_secret');
 
 $query = $connection->query("SHOW DATABASES");
 
