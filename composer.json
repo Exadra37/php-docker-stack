@@ -1,8 +1,18 @@
 {
     "name": "exadra37-docker-compose/laravel5",
-    "description": "All my repositories will have this one as starting point.",
+    "description": "Compose all necessary Docker Containers to run a Laravel 5 App.",
     "keywords": [
-        "Exadra37"
+        "Exadra37",
+        "laravel",
+        "laravel 5",
+        "laravel app",
+        "laravel docker container",
+        "dockerize",
+        "dockerize laravel",
+        "dockerize laravel app",
+        "docker"
+        "docker laravel",
+        "docker laravel app"
     ],
     "homepage": "https://gitlab.com/exadra37-docker-compose/laravel5",
     "license": "GPL-3.0",
