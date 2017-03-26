@@ -2,13 +2,15 @@ version: "2"
 
 services:
   web:
-    build: ./build/${WEB_SERVER}/${WEB_SERVER_VERSION}
+    image: ${WEB_SERVER_IMAGE}
     ports:
-      - ${WEB_SERVER_HOST_PORT}:80
+      - ${WEB_SERVER_PORT_MAP}
     links:
       - php
     volumes_from:
       - app
+    volumes:
+      - ${WEB_SERVER_CONFIG_VOLUMES_MAP}
     networks:
       - appnet
 
