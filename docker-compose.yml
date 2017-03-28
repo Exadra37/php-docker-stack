@@ -15,7 +15,7 @@ services:
       - appnet
 
   php:
-    build: ./build/php/${PHP_VERSION}
+    image: ${PHP_IMAGE}
     expose:
       - 9000
     links:
@@ -28,7 +28,7 @@ services:
   app:
     image: tianon/true
     volumes:
-      - ./:${APP_CONTAINER_DIR}
+      - ${APP_VOLUME_MAP}
     networks:
       - appnet
 
