@@ -1,18 +1,26 @@
 version: "2"
 
 services:
-  web:
-    image: ${WEB_SERVER_IMAGE}
+
+  app_code:
+    image: tianon/true
+    volumes:
+      - ${APP_CODE_VOLUME_MAP}
+    networks:
+      - app_network
+
+  http:
+    image: ${HTTP_IMAGE}
     ports:
-      - ${WEB_SERVER_PORT_MAP}
+      - ${HTTP_PORT_MAP}
     links:
       - php
     volumes_from:
-      - app
+      - app_code
     volumes:
-      - ${WEB_SERVER_CONFIG_VOLUMES_MAP}
+      - ${HTTP_CONFIG_VOLUMES_MAP}
     networks:
-      - appnet
+      - app_network
 
   php:
     image: ${PHP_IMAGE}
@@ -20,48 +28,41 @@ services:
       - 9000
     links:
       - database
+      - app_cache
     volumes_from:
-      - app
+      - app_code
     networks:
-      - appnet
-
-  app:
-    image: tianon/true
-    volumes:
-      - ${APP_VOLUME_MAP}
-    networks:
-      - appnet
+      - app_network
 
   database:
-    image: ${DB_SERVER}:${DB_SERVER_VERSION}
+    image: ${DATABASE_IMAGE}
     volumes:
-      - data:${DB_SERVER_CONTAINER_WORK_DIR}
+      - ${DATABASE_VOLUME_MAP}
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
     networks:
-      - appnet
-
-  artisan:
-    image: ${artisan_IMAGE}
+      - app_network
+  
+  app_cache:
+    image: ${APP_CACHE_IMAGE}
+    networks:
+      - app_network
+  
+  dev_cli:
+    image: ${DEV_CLI_IMAGE}
     links:
       - database
     volumes_from: 
-      - app
+      - app_code
     networks: 
-      - appnet
+      - app_network
 
-  # dev-tools:
-  #   image: ${DEV_TOOLS_IMAGE}
-  #   volumes_from: 
-  #     - app
-  #   networks: 
-  #     - appnet
 
 networks:
-  appnet:
+  app_network:
     driver: "bridge"
 
 volumes:
