@@ -44,6 +44,22 @@ services:
     networks:
       - appnet
 
+  artisan:
+    image: ${artisan_IMAGE}
+    links:
+      - database
+    volumes_from: 
+      - app
+    networks: 
+      - appnet
+
+  # dev-tools:
+  #   image: ${DEV_TOOLS_IMAGE}
+  #   volumes_from: 
+  #     - app
+  #   networks: 
+  #     - appnet
+
 networks:
   appnet:
     driver: "bridge"
