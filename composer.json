@@ -23,5 +23,13 @@
             "homepage": "https://exadra37.com",
             "role": "Software Developer"
         }
-    ]
+    ],
+    "bin": [
+        "bin/app"
+    ],
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"file_exists('app') || copy('bin/app', 'app');\""
+        ]
+    }
 }
