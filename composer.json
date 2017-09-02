@@ -33,7 +33,7 @@
     ],
     "scripts": {
         "post-root-package-install": [
-            "php -r \"file_exists('app') || copy('bin/app', 'app');\""
+            "cp ./bin/server ./../../../server"
         ]
     },
     "minimum-stability": "dev",
