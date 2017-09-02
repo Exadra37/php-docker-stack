@@ -21,7 +21,3 @@ RUN apt-get update && \
     # change from /usr/sbin/nologin to /usr/sbin/zsh
     usermod -s /usr/bin/zsh "${CONTAINER_USER}" && \
     su "${CONTAINER_USER}" -c 'bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"'
-
-ENTRYPOINT ["su", "php-fpm"]
-
-#CMD ["cd", "/home/php-fpm"]
