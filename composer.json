@@ -1,5 +1,5 @@
 {
-    "name": "exadra37-docker-compose/laravel5/docker-stack",
+    "name": "exadra37-docker-compose/laravel5-docker-stack",
     "description": "Compose all necessary Docker Containers to run a Laravel 5 App.",
     "keywords": [
         "Exadra37",
@@ -10,7 +10,7 @@
         "dockerize",
         "dockerize laravel",
         "dockerize laravel app",
-        "docker"
+        "docker",
         "docker laravel",
         "docker laravel app"
     ],
