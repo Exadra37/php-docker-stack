@@ -24,6 +24,10 @@
             "role": "Software Developer"
         }
     ],
+    "support": {
+        "issues": "https://gitlab.com/groups/exadra37-docker-compose/laravel5/issues",
+        "source": "https://gitlab.com/exadra37-docker-compose/laravel5/docker-stack/tree/master"
+    },
     "bin": [
         "bin/app"
     ],
@@ -31,5 +35,7 @@
         "post-root-package-install": [
             "php -r \"file_exists('app') || copy('bin/app', 'app');\""
         ]
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
