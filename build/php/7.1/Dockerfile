@@ -21,4 +21,4 @@ RUN apt-get update && \
 
 COPY ./php-fpm.d/zz-log.conf /usr/local/etc/php-fpm.d/zz-log.conf
 
-WORKDIR /home/php-fpm
+WORKDIR /home/"${CONTAINER_USER}"
