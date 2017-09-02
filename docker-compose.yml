@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 
 services:
 
@@ -6,99 +6,123 @@ services:
   #   PRODUCTION   #
   ##################
 
-  app_code:
+  code:
     image: tianon/true
     volumes:
-      - ${APP_CODE_VOLUME_MAP}
+      - ${HOST_CODE_DIR:-./../../../}:${CONTAINER_CODE_DIR:-/var/www}
     networks:
       - app_network
 
-  app_cache:
-    image: ${APP_CACHE_IMAGE}
+  cache:
+    image: ${CACHE_IMAGE:-redis:latest}
+    healthcheck:
+      test: "exit 0"
     networks:
       - app_network
-  
-  cron_job:
-    image: ${CRON_JOB_IMAGE}
-    depends_on: 
-      - php
-      - queue
-      - logger
-    volumes_from: 
-      - app_code
-    networks: 
+
+  cron-jobs:
+    image: ${CRON_JOBS_IMAGE:-exadra37/php-fpm-laravel5}
+    depends_on:
+      database:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+      logger:
+        condition: service_healthy
+      queue:
+        condition: service_healthy
+    volumes_from:
+      - code
+    networks:
       - app_network
-  
+
   database:
-    image: ${DATABASE_IMAGE}
+    image: ${DATABASE_IMAGE:-percona:latest}
+    healthcheck:
+      test: "exit 0"
     volumes:
-      - ${DATABASE_VOLUME_MAP}
+      - ${DATABASE_VOLUME_MAP:-data:/var/lib/mysql}
     environment:
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD:-rootsecret}
+      MYSQL_DATABASE: ${DB_DATABASE:-dockerstack}
+      MYSQL_USER: ${DB_USERNAME:-dockerstack}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
     networks:
       - app_network
 
   http:
-    image: ${HTTP_IMAGE}
+    image: ${HTTP_IMAGE:-nginx:latest}
     ports:
-      - ${HTTP_PORT_MAP}
+      - ${HTTP_PORT_MAP:-80:80}
     depends_on:
-      - php
+      php:
+        condition: service_healthy
     volumes_from:
-      - app_code
+      - code
     volumes:
-      - ${HTTP_CONFIG_VOLUMES_MAP}
+      - ${HTTP_CONFIG_VOLUMES_MAP:-./build/nginx/latest/conf.d:/etc/nginx/conf.d}
     networks:
       - app_network
-  
-  # load_balancer:
-  #   image: ${LOAD_BALANCER_IMAGE}
-  #   networks: 
-  #     - app_network
-      
+
   logger:
-    image: ${LOGGER_IMAGE}
-    networks: 
+    image: ${LOGGER_IMAGE:-elasticsearch:latest}
+    healthcheck:
+      test: "exit 0"
+    networks:
       - app_network
 
   php:
-    image: ${PHP_IMAGE}
+    image: ${PHP_IMAGE:-exadra37/php-fpm-laravel5}
+    working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     expose:
       - 9000
+    healthcheck:
+      test: "exit 0"
     depends_on:
-      - database
-      - app_cache
-      - queue
+      database:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+      logger:
+        condition: service_healthy
+      queue:
+        condition: service_healthy
+
     volumes_from:
-      - app_code
+      - code
     networks:
       - app_network
-  
+
   queue:
-    image: ${QUEUE_IMAGE}
-    volumes_from: 
-      - app_code
-    networks: 
+    image: ${QUEUE_IMAGE:-schickling/beanstalkd:latest}
+    healthcheck:
+      test: "exit 0"
+    volumes_from:
+      - code
+    networks:
       - app_network
 
-  
 
   ###################
   #   DEVELOPMENT   #
   ###################
 
-  dev_cli:
-    image: ${DEV_CLI_IMAGE}
+  dev-cli:
+    image: ${DEV_CLI_IMAGE:-exadra37/dev-cli}
+    working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     depends_on:
-      - database
-    volumes_from: 
-      - app_code
-    networks: 
+      database:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+      logger:
+        condition: service_healthy
+      queue:
+        condition: service_healthy
+    volumes_from:
+      - code
+    networks:
       - app_network
-
 
 networks:
   app_network:
