@@ -7,13 +7,13 @@ Contributions are welcome, provided that hey follow this guidelines.
 
 ### In a Current Issue
 
-Browse the [current open issues](https://gitlab.com/exadra37-docker-compose/laravel5/issues) and participate in the
+Browse the [current open issues](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/issues) and participate in the
 discussion for the ones you can help.
 
 
 ### In a new Issue
 
-If you have a new issue to report, please [create it](https://gitlab.com/exadra37-docker-compose/laravel5/issues/new) by
+If you have a new issue to report, please [create it](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/issues/new) by
 following the applicable [issue guidelines](docs/how-to/create_an_issue.md).
 
 
@@ -26,3 +26,10 @@ After an agreement is achieved the issue will be assigned to you.
 Now is time to fork the repository and start coding on it.
 
 When you are ready to merge it, please proceed as per this [Merge Requests Guidelines](docs/how-to/create_a_merge_request.md).
+
+
+---
+
+[<< previous](./docs/how-to/use.md) | [next >>](./docs/how-to/create_an_issue.md)
+
+[HOME](./../../README.md)

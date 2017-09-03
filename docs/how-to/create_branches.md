@@ -45,3 +45,10 @@ git fetch && git checkout -b issue-15_implement-redis-cache` origin/milestone-12
 ```bash
 git fetch && git checkout -b issue-16_implement-file-system-cache` origin/milestone-12_add-cache
 ```
+
+
+---
+
+[<< previous](create_an_issue.md) | [next >>](create_a_merge_request.md)
+
+[HOME](./../../README.md)

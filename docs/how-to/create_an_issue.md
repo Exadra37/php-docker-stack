@@ -12,7 +12,7 @@ All optional topics not used must maintain their title and have their body repla
 
 When any created issue do not follow this guidelines it will not be considered.
 
-Each issue will have is own Branch that are created as demonstrated [here](docs/how-to/create_branches).
+Each issue will have is own Branch that are created as demonstrated [here](create_branches.md).
 
 
 ## Bug Fix / Security Fix
@@ -20,19 +20,26 @@ Each issue will have is own Branch that are created as demonstrated [here](docs/
 Each issue should only target a specific bug or security flaw, unless they are tightly coupled to the point you can't
 solve them separately.
 
-Create the issue [here](https://gitlab.com/exadra37-docker-compose/laravel5/issues/new) with the template
+Create the issue [here](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/issues/new) with the template
 `bug_or_security_fix.md`.
 
 
 ## New Feature / Improve Feature / Refracting Code
 
-Starts with the [Creation of a Milestone](https://gitlab.com/exadra37-docker-compose/laravel5/milestones/new).
+Starts with the [Creation of a Milestone](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/milestones/new).
 
 Now we should split what we want to do in many tasks as we can by creating an Issue for each task and assign the issue
 to the Milestone.
 
-Create each issue [here](https://gitlab.com/exadra37-docker-compose/laravel5/issues/new) using the relevant template:
+Create each issue [here](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/issues/new) using the relevant template:
 
 * `new_feature.md`
 * `improve_feature.md`
 * `refracting_code.md`
+
+
+---
+
+[<< previous](./../../CONTRIBUTING.md) | [next >>](create_branches.md)
+
+[HOME](./../../README.md)

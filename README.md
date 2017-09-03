@@ -1,62 +1,62 @@
-# Docker Compose Laravel 5
+# Php7 Docker Stack
 
-Let's compose the docker containers to run our Laravel 5 App.
+Docker stack to run Php7 Apps in Production and Development, using Docker Compose Services like:
 
-
-## Show Your Appreciation
-
-If this is useful for you, please consider:
-
-* To share it on [Twitter](https://twitter.com/home?status=Run%20%23Laravel5%20App%20from%20%23docker%20container,%20served%20by%20%23nginx%20or%20%23apache%20with%20https%3A//gitlab.com/exadra37-docker-compose/laravel5%20%23LaravelPhp%20%23Laravel%20%23Dockerize%20%40Exadra37).
-* Or you may prefer to [offer me](https://www.paypal.me/exadra37) a coffee, a beer, a dinner or any other treat 😎.
-
-
-## SEMANTIC VERSIONING
-
-This package will adhere to this [Semantic Version](https://gitlab.com/exadra37-versioning/semantic-versioning) schema.
+* Http - Nginx, Apache, etc.
+* Php7 - Php-Fpm.
+* Database - Perconna, MariaDB, Mysql, etc.
+* Cache - Redis, MemCached, etc.
+* Logger - ElasticSearch.
+* Queue - Beenstalkd, RabbitMQ, ActiveMQ, Apache Kafka, etc.
+* Cron Jobs - Just to schedule cron jobs.
+* Dev CLI - Access to the container shell.
 
 
-## AUTHOR
+Php7 Docker Stack goals is to:
 
-More information about the Author can be found [here](AUTHOR.md).
-
-
-## CONTRIBUTORS
-
-All contributors can be found [here](CONTRIBUTORS.md).
+* make possible to have a clean Docker Stack to run Php Apps in any environment.
+* be Framework agnostic.
+* allow developers without Docker knowledge to use a Docker work-flow in their development environment.
 
 
-## LICENSE
-
-This repository uses GPL-3.0 license, that you can find [here](LICENSE).
-
-
-## CONTRIBUTING IN ISSUES / MERGE REQUESTS
-
-All contributions are welcome provided that they follow [Contributing Guidelines](CONTRIBUTING.md), where you can find
-how to _Create an Issue_ and _Merge Request_.
+> **NOTE:** Until this package achieves version `1.0.0.0` we should only use it for development, afterwards we should
+             use it also for production.
 
 
-## ROAD MAP
+## MENU
 
-Check [Milestones](https://gitlab.com/exadra37-docker-compose/laravel5/milestones) to see what Goals I want to achieve.
+* **The Package**
+    + [Why Exists?](./docs/the-package/why_exists.md)
+    + [What Is It?](./docs/the-package/what_is_it.md)
+    + [When To use It?](./docs/the-package/when_to_use_it.md)
+* **How To**
+    + [Install](./docs/how-to/install.md)
+    + [Use](./docs/how-to/use.md)
+    + [Report an Issue](./docs/how-to/create_an_issue.md)
+    + [Create a Branch](./docs/how-to/create_branches.md)
+    + [Open a Merge Request](./docs/how-to/create_a_merge_request.md)
+    + [Uninstall](./docs/how-to/uninstall.md)
+* **Road Map**
+    + [Milestones](https://gitlab.com/exadra37/my-base-repository/milestones)
+    + [Overview](https://gitlab.com/exadra37/my-base-repository/boards)
+* **About**
+    + [Author](AUTHOR.md)
+    + [Contributors](CONTRIBUTORS.md)
+    + [Contributing](CONTRIBUTING.md)
+    + [License](LICENSE)
 
-Watch [Boards](https://gitlab.com/exadra37-docker-compose/laravel5/boards) to keep track of what is going on.
+
+## SUPPORT DEVELOPMENT
+
+If this is useful for you, please:
+
+* Share it on [Twitter](https://twitter.com/home?status=Try%20%23Php7DockerStack%20to%20run%20%23PhpApps%20by%20%40Exadra37%20https%3A//gitlab.com/exadra37-docker-compose/php7/docker-stack%20%23php%20%23phpc%20%23phpapp%20%23phpdevelopers%20%23docker%20%23dockercompose%20%23laravel) or in any other channel of your preference.
+* Consider to [offer me](https://www.paypal.me/exadra37) a coffee, a beer, a dinner or any other treat 😎.
 
 
-## HOW TO INSTALL
+## EXPLICIT VERSIONING
 
-To install just follow detailed instructions from [here](docs/how-to/install.md).
-
-
-## HOW TO UNINSTALL
-
-To uninstall just follow detailed instructions from [here](docs/how-to/uninstall.md).
-
-
-## HOW TO USE
-
-See usage examples [here](docs/how-to/use.md).
+This repository uses [Explicit Versioning](https://gitlab.com/exadra37-versioning/explicit-versioning) schema.
 
 
 ## BRANCHES
