@@ -60,7 +60,7 @@ services:
     volumes_from:
       - code
     volumes:
-      - ${HTTP_CONFIG_VOLUMES_MAP:-./build/nginx/latest/conf.d:/etc/nginx/conf.d}
+      - ${HTTP_CONFIG_VOLUMES_MAP:-./setup/nginx/conf.d:/etc/nginx/conf.d}
     networks:
       - app_network
 
