@@ -37,8 +37,8 @@ Php7 Docker Stack goals is to:
     + [Open a Merge Request](./docs/how-to/create_a_merge_request.md)
     + [Uninstall](./docs/how-to/uninstall.md)
 * **Road Map**
-    + [Milestones](https://gitlab.com/exadra37/my-base-repository/milestones)
-    + [Overview](https://gitlab.com/exadra37/my-base-repository/boards)
+    + [Milestones](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/milestones)
+    + [Overview](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/boards)
 * **About**
     + [Author](AUTHOR.md)
     + [Contributors](CONTRIBUTORS.md)
