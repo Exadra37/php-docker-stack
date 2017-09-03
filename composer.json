@@ -19,7 +19,7 @@
     "authors": [
         {
             "name": "Paulo Silva",
-            "email": "exadra37@gmail.com",
+            "email": "exadra37ingmailpointcom",
             "homepage": "https://exadra37.com",
             "role": "Software Developer"
         }
@@ -29,7 +29,7 @@
         "source": "https://gitlab.com/exadra37-docker-compose/laravel5/docker-stack/tree/master"
     },
     "bin": [
-        "bin/app"
+        "bin/server"
     ],
     "scripts": {
         "post-root-package-install": [
