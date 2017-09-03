@@ -3,6 +3,17 @@
     "description": "A Docker Stack to run Php7 Apps. Composed by Http, Php, Database, Cache, Queue, Logger, Cron Jobs and CLI services.",
     "keywords": [
         "Exadra37",
+        "docker stack",
+        "php7 docker stack",
+        "docker php7 stack",
+        "php7 docker",
+        "docker php7",
+        "php docker",
+        "php docker stack",
+        "lamp",
+        "lemp",
+        "wamp",
+        "xampp",
         "laravel",
         "laravel 5",
         "laravel app",
@@ -12,7 +23,9 @@
         "dockerize laravel app",
         "docker",
         "docker laravel",
-        "docker laravel app"
+        "laravel docker",
+        "docker laravel app",
+        "laravel docker app"
     ],
     "homepage": "https://gitlab.com/exadra37-docker-compose/laravel5",
     "license": "GPL-3.0",
