@@ -1,6 +1,6 @@
 {
-    "name": "exadra37-docker-compose/laravel5-docker-stack",
-    "description": "Compose all necessary Docker Containers to run a Laravel 5 App.",
+    "name": "exadra37-docker-compose/php7-docker-stack",
+    "description": "A Docker Stack to run Php7 Apps. Composed by Http, Php, Database, Cache, Queue, Logger, Cron Jobs and CLI services.",
     "keywords": [
         "Exadra37",
         "laravel",
