@@ -9,7 +9,7 @@ services:
   code:
     image: tianon/true
     volumes:
-      - ${HOST_CODE_DIR:-./../../../}:${CONTAINER_CODE_DIR:-/var/www}
+      - ${HOST_CODE_DIR:-./../../../../}:${CONTAINER_CODE_DIR:-/var/www}
     networks:
       - app_network
 
@@ -21,7 +21,7 @@ services:
       - app_network
 
   cron-jobs:
-    image: ${CRON_JOBS_IMAGE:-exadra37/php-fpm-laravel5}
+    image: ${CRON_JOBS_IMAGE:-exadra37/php7-fpm:latest}
     depends_on:
       database:
         condition: service_healthy
@@ -72,7 +72,7 @@ services:
       - app_network
 
   php:
-    image: ${PHP_IMAGE:-exadra37/php-fpm-laravel5}
+    image: ${PHP_IMAGE:-exadra37/php7-fpm:latest}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     expose:
       - 9000
@@ -108,7 +108,7 @@ services:
   ###################
 
   dev-cli:
-    image: ${DEV_CLI_IMAGE:-exadra37/dev-cli}
+    image: ${DEV_CLI_IMAGE:-exadra37/php7-dev-cli:latest}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     depends_on:
       database:
