@@ -44,11 +44,6 @@
     "bin": [
         "bin/server"
     ],
-    "scripts": {
-        "post-root-package-install": [
-            "cp ./bin/server ./../../../server"
-        ]
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
