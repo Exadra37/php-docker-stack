@@ -4,7 +4,8 @@
 #  create unique names for the Docker containers in each project.
 PROJECT_NAME=${PWD##*/}
 
+# we want to use the App root as the project directory for docker-compose so that he can read the .env file.
 sudo docker-compose \
         -p "${PROJECT_NAME}" \
-        --project-directory "${PWD}" \ # we want to use the App root so that docker-compose can read the .env file from here.
+        --project-directory "${PWD}" \
         --file vendor/exadra37-docker-compose/php7-docker-stack/src/docker-compose.yml "${@}"
