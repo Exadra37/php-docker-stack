@@ -9,7 +9,7 @@ services:
   code:
     image: tianon/true
     volumes:
-      - ${HOST_CODE_DIR:-./../../../../}:${CONTAINER_CODE_DIR:-/var/www}
+      - ${HOST_CODE_DIR:-./}:${CONTAINER_CODE_DIR:-/var/www}
     networks:
       - app_network
 
