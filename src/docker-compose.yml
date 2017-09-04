@@ -51,7 +51,7 @@ services:
       - app_network
 
   http:
-    image: ${HTTP_IMAGE:-nginx:latest}
+    image: ${HTTP_IMAGE:-exadra37/nginx:latest}
     ports:
       - ${HTTP_PORT_MAP:-80:80}
     depends_on:
@@ -59,8 +59,6 @@ services:
         condition: service_healthy
     volumes_from:
       - code
-    volumes:
-      - ${HTTP_CONFIG_VOLUMES_MAP:-./setup/nginx/conf.d:/etc/nginx/conf.d}
     networks:
       - app_network
 
