@@ -21,6 +21,7 @@ services:
       - app_network
 
   cron-jobs:
+    build: ${CRON_JOBS_IMAGE_BUILD_CONTEXT:-./docker/cron-jobs/php7-fpm/build}
     image: ${CRON_JOBS_IMAGE:-exadra37/php7-fpm:latest}
     depends_on:
       database:
