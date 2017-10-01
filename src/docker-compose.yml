@@ -51,6 +51,7 @@ services:
       - app_network
 
   http:
+    build: ${HTTP_IMAGE_BUILD_CONTEXT:-./docker/http/nginx/build}
     image: ${HTTP_IMAGE:-exadra37/nginx:latest}
     ports:
       - ${HTTP_PORT_MAP:-80:80}
