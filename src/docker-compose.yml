@@ -97,6 +97,7 @@ services:
       - app_network
 
   queue:
+    build: ${QUEUE_IMAGE_BUILD_CONTEXT:-./docker/queue/beanstalkd/build}
     image: ${QUEUE_IMAGE:-schickling/beanstalkd:latest}
     healthcheck:
       test: "exit 0"
