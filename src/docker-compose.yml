@@ -112,6 +112,7 @@ services:
   ###################
 
   dev-cli:
+    build: ${DEV_CLI_IMAGE_BUILD_CONTEXT:-./docker/dev-cli/php7/build}
     image: ${DEV_CLI_IMAGE:-exadra37/php7-dev-cli:latest}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     depends_on:
