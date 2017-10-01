@@ -72,6 +72,7 @@ services:
       - app_network
 
   php:
+    build: ${PHP_IMAGE_BUILD_CONTEXT:-./docker/php/php7-fpm/build}
     image: ${PHP_IMAGE:-exadra37/php7-fpm:latest}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     expose:
