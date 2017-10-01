@@ -37,6 +37,7 @@ services:
       - app_network
 
   database:
+    build: ${DATABASE_IMAGE_BUILD_CONTEXT:-./docker/database/percona/build}
     image: ${DATABASE_IMAGE:-percona:latest}
     healthcheck:
       test: "exit 0"
