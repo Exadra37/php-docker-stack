@@ -63,6 +63,8 @@ services:
     depends_on:
       php:
         condition: service_healthy
+    volumes:
+      - ${HTTP_CONFIG_VOLUME_MAP:-./docker/http/nginx/build/conf.d:/etc/nginx/conf.d}
     volumes_from:
       - code
     networks:
