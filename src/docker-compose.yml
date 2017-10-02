@@ -94,7 +94,8 @@ services:
         condition: service_healthy
       queue:
         condition: service_healthy
-
+    volumes:
+      - ${PHP_INI_VOLUME_MAP:-./docker/php/php7-fpm/php.ini:/usr/local/etc/php.ini}
     volumes_from:
       - code
     networks:
