@@ -129,6 +129,9 @@ services:
         condition: service_healthy
       queue:
         condition: service_healthy
+    volumes:
+      - ${DEV_CLI_SSH_VOLUME_MAP:-~/.ssh:/home/php-fpm/.ssh}
+      - ${DEV_CLI_GIT_CONFIG_VOLUME_MAP:-~/.gitconfig:/home/php-fpm/.gitconfig}
     volumes_from:
       - code
     networks:
