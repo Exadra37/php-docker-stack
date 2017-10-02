@@ -129,6 +129,16 @@ services:
     networks:
       - app_network
 
+  database-cli:
+    build: ${DATABASE_CLI_IMAGE_CONTEXT:-./docker/database-cli/mycli/build}
+    image: ${DATABASE_CLI_IMAGE:-exadra37/mycli:latest}
+    networks:
+      - app_network
+    depends_on:
+      database:
+        condition: service_healthy
+    command: "--host database"
+
 networks:
   app_network:
     driver: "bridge"
