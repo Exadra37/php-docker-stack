@@ -16,6 +16,8 @@ services:
   cache:
     build: ${CACHE_IMAGE_BUILD_CONTEXT:-./docker/cache/redis/build}
     image: ${CACHE_IMAGE:-redis:latest}
+    ports:
+      - ${CACHE_PORTS_MAP:-6379:6379}
     healthcheck:
       test: "exit 0"
     networks:
