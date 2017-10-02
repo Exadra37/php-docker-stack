@@ -147,6 +147,15 @@ services:
         condition: service_healthy
     command: "--host database"
 
+  cache-cli:
+    build: ${CACHE_CLI_IMAGE_BUILD_CONTEXT:-./docker/cache-cli/redis/build}
+    image: ${CACHE_IMAGE:-redis:latest}
+    healthcheck:
+      test: "exit 0"
+    networks:
+      - app_network
+    entrypoint: ${CACHE_CLI_ENTRYPOINT:-redis-cli -h cache}
+
 networks:
   app_network:
     driver: "bridge"
