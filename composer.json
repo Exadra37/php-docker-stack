@@ -45,7 +45,13 @@
         "bin/server"
     ],
     "scripts": {
-        "post-root-package-install": [
+        "post-package-install": [
+            "./bin/php7-docker-stack-setup.sh"
+        ],
+        "post-install-cmd": [
+            "./bin/php7-docker-stack-setup.sh"
+        ],
+        "post-update-cmd": [
             "./bin/php7-docker-stack-setup.sh"
         ]
     },
