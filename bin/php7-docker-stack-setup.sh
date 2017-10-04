@@ -9,7 +9,7 @@ function createDirIfNotExists()
 
 function copyDockerDirToProject()
 {
-    [ -d "./docker" ] || cp -rn ./vendor/exadra37-docker-compose/php7-docker-stack/src/docker .
+    [ -d "./docker" ] || cp -rnv ./vendor/exadra37-docker-compose/php7-docker-stack/src/docker .
 }
 
 # creating the default dirs to persist the containers data. otherwise they will
