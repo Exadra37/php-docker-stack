@@ -44,6 +44,11 @@
     "bin": [
         "bin/server"
     ],
+    "scripts": {
+        "post-root-package-install": [
+            "./bin/php7-docker-stack-setup.sh"
+        ]
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
