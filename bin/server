@@ -1,4 +1,20 @@
-#!/bin/sh
+#!/bin/bash
+
+set -e
+
+source ./vendor/exadra37-docker-compose/php7-docker-stack/bin/php7-docker-stack-setup.sh
+
+if [ "--setup-docker-stack" == "${1}" ]
+    then
+        setupDockerStack
+        exit 0
+fi
+
+# For first run we want to ensure that the ./docker folder exists in the project.
+if [ ! -d ./docker ]
+    then
+        setupDockerStack
+fi
 
 # We need to ensure that if Php7 Docker Stack is used in more than 1 project, in same machine, Docker compose is able to
 #  create unique names for the Docker containers in each project.
