@@ -3,7 +3,7 @@
 set -e
 
 source ./vendor/exadra37-docker-compose/php7-docker-stack/bin/php7-docker-stack-setup.sh
-source ./vendor/exadra37-docker-compose/php7-docker-stack/bin/parse-env-vars.sh
+source ./vendor/exadra37-docker-compose/php7-docker-stack/bin/docker-pull-from-env-vars.sh
 
 if [ "--setup-docker-stack" == "${1}" ]
     then
