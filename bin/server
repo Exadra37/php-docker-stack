@@ -1,11 +1,178 @@
-#!/bin/sh
+#!/bin/bash
 
-# We need to ensure that if Php7 Docker Stack is used in more than 1 project, in same machine, Docker compose is able to
-#  create unique names for the Docker containers in each project.
-PROJECT_NAME=${PWD##*/}
+set -e
 
-# we want to use the App root as the project directory for docker-compose so that he can read the .env file.
-sudo docker-compose \
-    -p "${PROJECT_NAME}" \
-    --project-directory "${PWD}" \
-    --file vendor/exadra37-docker-compose/php7-docker-stack/src/docker-compose.yml "${@}"
+########################################################################################################################
+# Sourcing
+########################################################################################################################
+
+    script_dir=$(dirname $(readlink -f $0))
+    source "${script_dir}/sudo-exists.sh"
+    source "${script_dir}/parse-env-var.sh"
+    source "${script_dir}/php7-docker-stack-setup.sh"
+    source "${script_dir}/docker-pull-from-env-vars.sh"
+
+
+########################################################################################################################
+# Defaults
+########################################################################################################################
+
+    env_vars="CACHE_IMAGE,CRON_JOBS_IMAGE,DATABASE_IMAGE,HTTP_IMAGE,LOGGER_IMAGE,MONITOR_IMAGE,PHP_IMAGE,QUEUE_IMAGE,DEV_CLI_IMAGE,DATABASE_CLI_IMAGE"
+    sudo_prefix=$(Sudo_Prefix)
+
+
+########################################################################################################################
+# Functions
+########################################################################################################################
+
+    # TODO:
+    #   → Show help by sections
+    function Show_Help()
+    {
+        local _script_dir="${1?}"
+
+        cat "${script_dir}/server-help.txt"
+
+        "${sudo_prefix}" docker-compose --help
+
+        exit 0
+    }
+
+    # We need to ensure that if Php7 Docker Stack is used in more than 1 project, in same machine, Docker compose is able to
+    #  create unique names for the Docker containers in each project.
+    function Get_App_Name()
+    {
+        local _env_file="${1?}"
+        local _app_name="$(Parse_Env_Var_From_Env_File "APP_NAME" "${_env_file}")"
+
+        if [ -z "${_app_name}" ]
+            then
+                _app_name=${PWD##*/}
+        fi
+
+        echo "${_app_name}"
+    }
+
+    # Unless --skip-pull-docker-images is passed, by default we will pull Docker Images only for docker compose commands:
+    #   → up
+    #   → run
+    function Is_To_Pull_Docker_Images()
+    {
+        local _argument
+        local _env_file="${1?}"
+        local _is_to_pull_docker_images="$(Parse_Env_Var_From_Env_File "IS_TO_PULL_DOCKER_IMAGES" "${_env_file}")"
+
+        if [ "${_is_to_pull_docker_images}" == "false" ]
+            then
+                return 1 # don't pull docker images
+        fi
+
+        for _argument in "${@}"
+            do
+                if [ "${_argument}" == "--skip-pull-docker-images" ] || [ "${_argument}" == "help" ]
+                    then
+                        return 1 # don't pull docker images
+                fi
+
+                if [ "${_argument}" == "up" ] || [ "${_argument}" == "run" ]
+                    then
+                        return 0 # pull docker images
+                fi
+        done
+
+        return 1 # don't pull docker images
+    }
+
+
+########################################################################################################################
+# Arguments
+########################################################################################################################
+
+    # TODO: Maybe accept them as optional arguments?
+    env_file=".env"
+    docker_compose_file="vendor/exadra37-docker-compose/php7-docker-stack/src/docker-compose.yml"
+
+    if [ -z "${1}" ]
+        then
+            Show_Help "${script_dir}"
+    fi
+
+    for argument in "${@}"
+        do
+            case "${argument}" in
+                --help | -h)
+                    Show_Help "${script_dir}"
+                    ;;
+                --setup-docker-stack)
+                    Setup_Docker_Stack
+                    exit 0
+                    ;;
+                --update-docker-images)
+                    Pull_Docker_Images_From_Env_Vars "${env_vars}" "${env_file}" "${docker_compose_file}"
+                    exit 0
+                    ;;
+                --rebuild-docker-images)
+                    # TODO:
+                    #   → rebuild all docker images refreneced by env vars.
+                    printf "\n---> NOT IMPLEMENTED YET... <---\n"
+                    exit 0;
+                    ;;
+                --remove-docker-images)
+                    # TODO:
+                    #   → remove all docker images referenced  by env vars that are not being used.
+                    printf "\n---> NOT IMPLEMENTED YET... <---\n"
+                    exit 0;
+                    ;;
+                --remove-docker-volumes)
+                    # TODO:
+                    #   → remove all docker volumes referenced  by env vars that are not being used.
+                    printf "\n---> NOT IMPLEMENTED YET... <---\n"
+                    exit 0;
+                    ;;
+                --remove-docker-stack)
+                    # TODO:
+                    #   → remove docker images.
+                    #   → remove docker volumes.
+                    #   → other leftovers I may remind later...
+                    printf "\n---> NOT IMPLEMENTED YET... <---\n"
+                    exit 0;
+                    ;;
+            esac
+    done
+
+
+########################################################################################################################
+# Execution
+########################################################################################################################
+
+    # We want to ensure that the ./docker folder exists in the project in any run, otherwise docker compose will fail
+    #  to run when the required docker image needs to be build locally.
+    if [ ! -d ./docker ]
+        then
+            Setup_Docker_Stack
+    fi
+
+    # By default we pull docker images on each server up or server run
+    if Is_To_Pull_Docker_Images "${env_file}" "${@}"
+        then
+            Pull_Docker_Images_From_Env_Vars "${env_vars}" "${env_file}" "${docker_compose_file}"
+    fi
+
+    # Remove all argument options that belong only to this script, otherwise docker compose will fail.
+    for argument in "${@}"
+        do
+            case "${argument}" in
+                --skip-pull-docker-images) shift 1 ;;
+            esac
+    done
+
+    # TODO:
+    #   → execute `run` commands with `--rm` option.
+    #   → execute `up` commands with `-d` option in production.
+    #
+    # we want to use the App root as the project directory for docker-compose so that he can read the .env file.
+    "${sudo_prefix}" docker-compose \
+        -p "$(Get_App_Name "${env_file}")" \
+        --project-directory "${PWD}" \
+        --file "${docker_compose_file}" \
+        "${@}"

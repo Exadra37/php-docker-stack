@@ -1,0 +1,52 @@
+PHP7 DOCKER STACK
+
+This is a wrapper bash script for `docker-compose` command to run a Docker Stack
+for any Php 7 App.
+
+
+Usage:
+
+    server [wrapper-options] [docker-compose usage here...]
+
+
+Wrapper Options:
+
+    -h, --help                  Show the wrapper bash script and docker compose help.
+
+    --setup-docker-stack        Runs the setup for the Php7 Docker Stack.
+                                By default is auto invoked on first run.
+
+    --update-docker-images      Will run docker pull for all docker images being used.
+                                This is the default behavior on each invocation of server up|run.
+                                Will get the latest updates for each docker image.
+
+    --skip-pull-docker-images   When we want to run without pull docker images.
+                                Useful also to override the env var IS_TO_PULL_DOCKER_IMAGES.
+
+
+Examples:
+
+    Brings up all services defined in the `docker-compose.yml`:
+        server up
+
+    Brings up all services, but skips pulling docker images:
+        server --skip-pull-docker-images up
+
+    Brings up the Http service with all other services it depends on(if in the service definition):
+        server up http
+
+    Runs a developer shell to work with the Php7 Docker Stack:
+        server run dev-cli
+
+    Runs a mysql shell to access the Database:
+        server run database-cli
+
+    Taking all services down:
+        It will destroy all docker containers.
+        The data persisted by containers on host is not destroyed.
+        Run as:
+            server down
+
+
+DOCKER COMPOSE
+
