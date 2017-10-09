@@ -14,7 +14,7 @@ services:
       - app_network
 
   cache:
-    build: ${CACHE_IMAGE_BUILD_CONTEXT:-./docker/cache/redis/build}
+    build: ${CACHE_IMAGE_BUILD_DIR:-./docker/cache/redis/build}
     image: ${CACHE_IMAGE:-redis:latest}
     ports:
       - ${CACHE_PORTS_MAP:-6379:6379}
@@ -24,7 +24,7 @@ services:
       - app_network
 
   cron-jobs:
-    build: ${CRON_JOBS_IMAGE_BUILD_CONTEXT:-./docker/cron-jobs/php7-fpm/build}
+    build: ${CRON_JOBS_IMAGE_BUILD_DIR:-./docker/cron-jobs/php7-fpm/build}
     image: ${CRON_JOBS_IMAGE:-exadra37/php7-fpm:latest}
     depends_on:
       database:
@@ -41,12 +41,12 @@ services:
       - app_network
 
   database:
-    build: ${DATABASE_IMAGE_BUILD_CONTEXT:-./docker/database/percona/build}
+    build: ${DATABASE_IMAGE_BUILD_DIR:-./docker/database/percona/build}
     image: ${DATABASE_IMAGE:-percona:latest}
     healthcheck:
       test: "exit 0"
     volumes:
-      - ${DATABASE_VOLUME_MAP:-data:/var/lib/mysql}
+      - ${DATABASE_VOLUME_MAP:-~/.dockerize/services/database/volumes/mysql:/var/lib/mysql}
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD:-rootsecret}
       MYSQL_DATABASE: ${DB_DATABASE:-dockerstack}
@@ -56,7 +56,7 @@ services:
       - app_network
 
   http:
-    build: ${HTTP_IMAGE_BUILD_CONTEXT:-./docker/http/nginx/build}
+    build: ${HTTP_IMAGE_BUILD_DIR:-./docker/http/nginx/build}
     image: ${HTTP_IMAGE:-exadra37/nginx:latest}
     ports:
       - ${HTTP_PORT_MAP:-80:80}
@@ -71,14 +71,37 @@ services:
       - app_network
 
   logger:
+    build: ${LOGGER_IMAGE_BUILD_DIR:-./docker/logger/elasticsearch/build}
     image: ${LOGGER_IMAGE:-elasticsearch:latest}
     healthcheck:
       test: "exit 0"
+    ports:
+      - ${LOGGER_HTTP_PORT_MAP:-9200:9200}
+    environment:
+      - cluster.routing.allocation.disk.watermark.low=2gb
+      - cluster.routing.allocation.disk.watermark.high=1gb
+    volumes:
+      - ${LOGGER_VOLUME_MAP:-~/.dockerize/services/logger/volumes/elasticsearch:/usr/share/elasticsearch/data}
+    networks:
+      - app_network
+
+  monitor:
+    build: ${MONITOR_IMAGE_BUILD_DIR:-./docker/monitor/kibana/build}
+    image: ${MONITOR_IMAGE:-kibana:latest}
+    healthcheck:
+      test: "exit 0"
+    ports:
+      - ${MONITOR_HTTP_PORT_MAP:-5601:5601}
+    environment:
+      ELASTICSEARCH_URL: ${MONITOR_LOGGER_URL:-http://logger:9200}
+    depends_on:
+      logger:
+        condition: service_healthy
     networks:
       - app_network
 
   php:
-    build: ${PHP_IMAGE_BUILD_CONTEXT:-./docker/php/php7-fpm/build}
+    build: ${PHP_IMAGE_BUILD_DIR:-./docker/php/php7-fpm/build}
     image: ${PHP_IMAGE:-exadra37/php7-fpm:latest}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     expose:
@@ -90,7 +113,7 @@ services:
         condition: service_healthy
       cache:
         condition: service_healthy
-      logger:
+      monitor:
         condition: service_healthy
       queue:
         condition: service_healthy
@@ -102,7 +125,7 @@ services:
       - app_network
 
   queue:
-    build: ${QUEUE_IMAGE_BUILD_CONTEXT:-./docker/queue/beanstalkd/build}
+    build: ${QUEUE_IMAGE_BUILD_DIR:-./docker/queue/beanstalkd/build}
     image: ${QUEUE_IMAGE:-schickling/beanstalkd:latest}
     healthcheck:
       test: "exit 0"
@@ -117,7 +140,7 @@ services:
   ###################
 
   dev-cli:
-    build: ${DEV_CLI_IMAGE_BUILD_CONTEXT:-./docker/dev-cli/php7/build}
+    build: ${DEV_CLI_IMAGE_BUILD_DIR:-./docker/dev-cli/php7/build}
     image: ${DEV_CLI_IMAGE:-exadra37/php7-dev-cli:latest}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     depends_on:
@@ -125,7 +148,7 @@ services:
         condition: service_healthy
       cache:
         condition: service_healthy
-      logger:
+      monitor:
         condition: service_healthy
       queue:
         condition: service_healthy
@@ -159,7 +182,3 @@ services:
 networks:
   app_network:
     driver: "bridge"
-
-volumes:
-  data:
-    driver: "local"
