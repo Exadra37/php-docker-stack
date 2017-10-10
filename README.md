@@ -36,6 +36,8 @@ Php7 Docker Stack goals is to:
     + [Create a Branch](./docs/how-to/create_branches.md)
     + [Open a Merge Request](./docs/how-to/create_a_merge_request.md)
     + [Uninstall](./docs/how-to/uninstall.md)
+* **Demos**
+    + [Laravel 5.5](./docs/demos/laravel-5.5.md)
 * **Road Map**
     + [Milestones](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/milestones)
     + [Overview](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/boards)
