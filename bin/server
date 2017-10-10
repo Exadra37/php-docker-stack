@@ -17,8 +17,9 @@ set -e
 # Defaults
 ########################################################################################################################
 
-    env_vars="CACHE_IMAGE,CRON_JOBS_IMAGE,DATABASE_IMAGE,HTTP_IMAGE,LOGGER_IMAGE,MONITOR_IMAGE,PHP_IMAGE,QUEUE_IMAGE,DEV_CLI_IMAGE,DATABASE_CLI_IMAGE"
     sudo_prefix=$(Sudo_Prefix)
+    env_vars="CACHE_IMAGE,CRON_JOBS_IMAGE,DATABASE_IMAGE,HTTP_IMAGE,LOGGER_IMAGE,MONITOR_IMAGE,PHP_IMAGE,QUEUE_IMAGE,DEV_CLI_IMAGE,DATABASE_CLI_IMAGE"
+    host_dir_env_vars="DATABASE_VOLUME_MAP,LOGGER_VOLUME_MAP"
 
 
 ########################################################################################################################
@@ -104,7 +105,7 @@ set -e
                     Show_Help "${script_dir}"
                     ;;
                 --setup-docker-stack)
-                    Setup_Docker_Stack
+                    Setup_Docker_Stack "${host_dir_env_vars}" "${env_file}" "${docker_compose_file}"
                     exit 0
                     ;;
                 --update-docker-images)
@@ -149,7 +150,7 @@ set -e
     #  to run when the required docker image needs to be build locally.
     if [ ! -d ./docker ]
         then
-            Setup_Docker_Stack
+            Setup_Docker_Stack "${host_dir_env_vars}" "${env_file}" "${docker_compose_file}"
     fi
 
     # By default we pull docker images on each server up or server run
