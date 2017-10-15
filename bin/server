@@ -9,7 +9,7 @@ set -e
     script_dir=$(dirname $(readlink -f $0))
     source "${script_dir}/sudo-exists.sh"
     source "${script_dir}/parse-env-var.sh"
-    source "${script_dir}/php7-docker-stack-setup.sh"
+    source "${script_dir}/php-docker-stack-setup.sh"
     source "${script_dir}/docker-pull-from-env-vars.sh"
 
 
@@ -18,8 +18,8 @@ set -e
 ########################################################################################################################
 
     sudo_prefix=$(Sudo_Prefix)
-    env_vars="CACHE_IMAGE,CRON_JOBS_IMAGE,DATABASE_IMAGE,HTTP_IMAGE,LOGGER_IMAGE,MONITOR_IMAGE,PHP_IMAGE,QUEUE_IMAGE,DEV_CLI_IMAGE,DATABASE_CLI_IMAGE"
-    host_dir_env_vars="DATABASE_VOLUME_MAP,LOGGER_VOLUME_MAP"
+    env_vars="CACHE_IMAGE,CRON_JOBS_IMAGE,DATABASE_IMAGE,HTTP_IMAGE,LOGS_PIPELINE_IMAGE,LOGS_STORAGE_IMAGE,LOGS_DASHBOARD_IMAGE,PHP_IMAGE,QUEUE_IMAGE,DEV_CLI_IMAGE,DATABASE_CLI_IMAGE"
+    host_dir_env_vars="DATABASE_VOLUME_MAP,LOGS_STORAGE_VOLUME_MAP"
 
 
 ########################################################################################################################
@@ -39,7 +39,7 @@ set -e
         exit 0
     }
 
-    # We need to ensure that if Php7 Docker Stack is used in more than 1 project, in same machine, Docker compose is able to
+    # We need to ensure that if Php Docker Stack is used in more than 1 project, in same machine, Docker compose is able to
     #  create unique names for the Docker containers in each project.
     function Get_App_Name()
     {
@@ -91,7 +91,7 @@ set -e
 
     # TODO: Maybe accept them as optional arguments?
     env_file=".env"
-    docker_compose_file="vendor/exadra37-docker-compose/php7-docker-stack/src/docker-compose.yml"
+    docker_compose_file="vendor/exadra37-docker/php-docker-stack/src/docker-compose.yml"
 
     if [ -z "${1}" ]
         then
@@ -170,6 +170,8 @@ set -e
     # TODO:
     #   → execute `run` commands with `--rm` option.
     #   → execute `up` commands with `-d` option in production.
+    #   → remove depends_on from docker compose and handle them here by reading
+    #      them from an environment variable for each docker service.
     #
     # we want to use the App root as the project directory for docker-compose so that he can read the .env file.
     "${sudo_prefix}" docker-compose \

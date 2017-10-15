@@ -20,18 +20,18 @@ Each issue will have is own Branch that are created as demonstrated [here](creat
 Each issue should only target a specific bug or security flaw, unless they are tightly coupled to the point you can't
 solve them separately.
 
-Create the issue [here](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/issues/new) with the template
+Create the issue [here](https://gitlab.com/exadra37-docker/php/docker-stack/issues/new) with the template
 `bug_or_security_fix.md`.
 
 
 ## New Feature / Improve Feature / Refracting Code
 
-Starts with the [Creation of a Milestone](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/milestones/new).
+Starts with the [Creation of a Milestone](https://gitlab.com/exadra37-docker/php/docker-stack/milestones/new).
 
 Now we should split what we want to do in many tasks as we can by creating an Issue for each task and assign the issue
 to the Milestone.
 
-Create each issue [here](https://gitlab.com/exadra37-docker-compose/php7/docker-stack/issues/new) using the relevant template:
+Create each issue [here](https://gitlab.com/exadra37-docker/php/docker-stack/issues/new) using the relevant template:
 
 * `new_feature.md`
 * `improve_feature.md`

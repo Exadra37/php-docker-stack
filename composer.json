@@ -1,6 +1,6 @@
 {
-    "name": "exadra37-docker-compose/php7-docker-stack",
-    "description": "A Docker Stack to run Php7 Apps. Composed by Http, Php, Database, Cache, Queue, Logger, Cron Jobs and CLI services.",
+    "name": "exadra37-docker/php-docker-stack",
+    "description": "A Docker Stack to run Php Apps. Composed by Http, Php, Database, Cache, Queue, Logger, Cron Jobs and CLI services.",
     "keywords": [
         "Exadra37",
         "docker stack",
@@ -10,6 +10,7 @@
         "docker php7",
         "php docker",
         "php docker stack",
+        "docker php stack",
         "lamp",
         "lemp",
         "wamp",
@@ -27,19 +28,19 @@
         "docker laravel app",
         "laravel docker app"
     ],
-    "homepage": "https://gitlab.com/exadra37-docker-compose/laravel5",
+    "homepage": "https://gitlab.com/exadra37-docker/php/docker-stack",
     "license": "GPL-3.0",
     "authors": [
         {
             "name": "Exadra37",
             "email": "exadra37@gmail.com",
             "homepage": "https://exadra37.com",
-            "role": "Software Developer"
+            "role": "Software Engineer"
         }
     ],
     "support": {
-        "issues": "https://gitlab.com/groups/exadra37-docker-compose/laravel5/issues",
-        "source": "https://gitlab.com/exadra37-docker-compose/laravel5/docker-stack/tree/master"
+        "issues": "https://gitlab.com/groups/exadra37-docker/php/docker-stack/issues",
+        "source": "https://gitlab.com/exadra37-docker/php/docker-stack/tree/master"
     },
     "bin": [
         "bin/server"

@@ -26,12 +26,13 @@ services:
   cron-jobs:
     build: ${CRON_JOBS_IMAGE_BUILD_DIR:-./docker/cron-jobs/php7-fpm/build}
     image: ${CRON_JOBS_IMAGE:-exadra37/php7-fpm:latest}
+    working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     depends_on:
       database:
         condition: service_healthy
       cache:
         condition: service_healthy
-      logger:
+      logs-dashboard:
         condition: service_healthy
       queue:
         condition: service_healthy
@@ -46,9 +47,9 @@ services:
     healthcheck:
       test: "exit 0"
     volumes:
-      - ${DATABASE_VOLUME_MAP:-~/.dockerize/services/database/volumes/mysql:/var/lib/mysql}
+      - ${DATABASE_VOLUME_MAP:-~/.php-docker-stack/services/database/volumes/mysql:/var/lib/mysql}
     environment:
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD:-rootsecret}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootsecret}
       MYSQL_DATABASE: ${DB_DATABASE:-dockerstack}
       MYSQL_USER: ${DB_USERNAME:-dockerstack}
       MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
@@ -70,32 +71,58 @@ services:
     networks:
       - app_network
 
-  logger:
-    build: ${LOGGER_IMAGE_BUILD_DIR:-./docker/logger/elasticsearch/build}
-    image: ${LOGGER_IMAGE:-elasticsearch:latest}
+  logs-pipeline:
+    build: ${LOGS_PIPELINE_IMAGE_BUILD_DIR:-./docker/logs-pipeline/logstash/build}
+    image: ${LOGS_PIPELINE_IMAGE:-docker.elastic.co/logstash/logstash:5.6.3}
     healthcheck:
       test: "exit 0"
-    ports:
-      - ${LOGGER_HTTP_PORT_MAP:-9200:9200}
-    environment:
-      - cluster.routing.allocation.disk.watermark.low=2gb
-      - cluster.routing.allocation.disk.watermark.high=1gb
+    env_file:
+      - ${LOGS_STORAGE_ENV_FILE:-./docker/logs-storage/elasticsearch/build/public.env}
+      - ${LOGS_PIPELINE_ENV_FILE:-./docker/logs-pipeline/logstash/build/.env}
+      - .env
+    depends_on:
+      logs-storage:
+        condition: service_healthy
     volumes:
-      - ${LOGGER_VOLUME_MAP:-~/.dockerize/services/logger/volumes/elasticsearch:/usr/share/elasticsearch/data}
+      - ${LOGS_PIPELINE_SETUP_MAP:-./docker/logs-pipeline/logstash/build/pipeline:/usr/share/logstash/pipeline}
+      #- ${LOGS_PIPELINE_CONFIG_MAP:-./docker/logs-pipeline/logstash/config:/usr/share/logstash/config}
     networks:
       - app_network
 
-  monitor:
-    build: ${MONITOR_IMAGE_BUILD_DIR:-./docker/monitor/kibana/build}
-    image: ${MONITOR_IMAGE:-kibana:latest}
+  logs-storage:
+    build: ${LOGS_STORAGE_IMAGE_BUILD_DIR:-./docker/logs-storage/elasticsearch/build}
+    image: ${LOGS_STORAGE_IMAGE:-docker.elastic.co/elasticsearch/elasticsearch:5.6.3}
+    healthcheck:
+      test: "exit 0"
+    env_file:
+      - ${LOGS_STORAGE_ENV_FILE:-./docker/logs-storage/elasticsearch/build/.env}
+      - .env
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - ${LOGS_STORAGE_HTTP_PORT_MAP:-9200:9200}
+    volumes:
+      - ${LOGS_STORAGE_VOLUME_MAP:-~/.php-docker-stack/services/logs-storage/volumes/elasticsearch:/usr/share/elasticsearch/data}
+      #- ${LOGS_STORAGE_CONFIG_MAP:-./docker/logs-storage/elasticsearch/config:/usr/share/elasticsearch/config}
+    networks:
+      - app_network
+
+
+  logs-dashboard:
+    build: ${LOGS_DASHBOARD_IMAGE_BUILD_DIR:-./docker/logs-dashboard/kibana/build}
+    image: ${LOGS_DASHBOARD_IMAGE:-docker.elastic.co/kibana/kibana:5.6.3}
     healthcheck:
       test: "exit 0"
     ports:
-      - ${MONITOR_HTTP_PORT_MAP:-5601:5601}
-    environment:
-      ELASTICSEARCH_URL: ${MONITOR_LOGGER_URL:-http://logger:9200}
+      - ${LOGS_DASHBOARD_HTTP_PORT_MAP:-5601:5601}
+    env_file:
+      - ${LOGS_STORAGE_ENV_FILE:-./docker/logs-storage/elasticsearch/build/public.env}
+      - ${LOGS_STORAGE_ENV_FILE:-./docker/logs-dashboard/kibana/build/.env}
+      - .env
     depends_on:
-      logger:
+      logs-pipeline:
         condition: service_healthy
     networks:
       - app_network
@@ -104,8 +131,6 @@ services:
     build: ${PHP_IMAGE_BUILD_DIR:-./docker/php/php7-fpm/build}
     image: ${PHP_IMAGE:-exadra37/php7-fpm:latest}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
-    expose:
-      - 9000
     healthcheck:
       test: "exit 0"
     depends_on:
@@ -113,7 +138,7 @@ services:
         condition: service_healthy
       cache:
         condition: service_healthy
-      monitor:
+      logs-dashboard:
         condition: service_healthy
       queue:
         condition: service_healthy
@@ -148,7 +173,9 @@ services:
         condition: service_healthy
       cache:
         condition: service_healthy
-      monitor:
+      logs-dashboard:
+        condition: service_healthy
+      logs-pipeline:
         condition: service_healthy
       queue:
         condition: service_healthy

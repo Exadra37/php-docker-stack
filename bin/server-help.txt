@@ -1,7 +1,8 @@
+
 PHP7 DOCKER STACK
 
 This is a wrapper bash script for `docker-compose` command to run a Docker Stack
-for any Php 7 App.
+for any Php App.
 
 
 Usage:
@@ -13,7 +14,7 @@ Wrapper Options:
 
     -h, --help                  Show the wrapper bash script and docker compose help.
 
-    --setup-docker-stack        Runs the setup for the Php7 Docker Stack.
+    --setup-docker-stack        Runs the setup for the Php Docker Stack.
                                 By default is auto invoked on first run.
 
     --update-docker-images      Will run docker pull for all docker images being used.
@@ -35,7 +36,7 @@ Examples:
     Brings up the Http service with all other services it depends on(if in the service definition):
         server up http
 
-    Runs a developer shell to work with the Php7 Docker Stack:
+    Runs a developer shell to work with the Php Docker Stack:
         server run dev-cli
 
     Runs a mysql shell to access the Database:

@@ -1,10 +1,14 @@
 # HOW TO INSTALL
 
-Php7 Docker Stack is easy to install in any Php App using composer to manage their dependencies.
+Php Docker Stack is easy to install in any Php App using composer to manage their dependencies.
 
-A docker version equal or greater than `1.12.0` is required.
 
-To install Docker follow [official documentation](https://docs.docker.com/engine/installation/) and after return here.
+## Requirements
+
+* A docker version equal or greater than 1.12.0. To install Docker please
+   [follow this instructions](https://docs.docker.com/engine/installation/).
+* Docker Composer in a version equal or greater than `2.1`. To install Docker
+   Compose please [follow this instructions](https://docs.docker.com/compose/install/).
 
 
 ## Using Composer
@@ -14,7 +18,7 @@ Until we reach version `1.0.0.0` we  must require only as a `dev` dependency.
 ##### Type in the shell:
 
 ```bash
-composer require --dev exadra37-docker-compose/php7-docker-stack
+composer require --dev exadra37-docker/php-docker-stack
 ```
 
 
@@ -23,7 +27,7 @@ composer require --dev exadra37-docker-compose/php7-docker-stack
 ##### Type in the shell:
 
 ```bash
-mkdir -p vendor/exadra37-docker-compose && git clone https://gitlab.com/exadra37-docker-compose/php7/docker-stack.git vendor/exadra37-docker-compose/php7-docker-stack
+mkdir -p vendor/exadra37-docker && git clone https://gitlab.com/exadra37-docker/php/docker-stack.git vendor/exadra37-docker/php-docker-stack && ln -s ./../exadra37-docker/php-docker-stack/bin/server ./vendor/bin/server
 ```
 
 
@@ -40,13 +44,16 @@ This is done by using a bash script named `server`, that will alias calls to `do
 #### Expected output
 
 ```bash
-Define and run multi-container applications with Docker.
+PHP7 DOCKER STACK
+
+This is a wrapper bash script for `docker-compose` command to run a Docker Stack
+for any Php App.
+
 
 Usage:
-  docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
-  docker-compose -h|--help
 
-Options:
+    server [wrapper-options] [docker-compose usage here...]
+
 ... # stripping remaining output
 
 ```

@@ -1,6 +1,6 @@
 # HOW TO USE
 
-Any developer with zero experience of Docker can take advantage of Php7 Docker Stack work-flow.
+Any developer with zero experience of Docker can take advantage of Php Docker Stack work-flow.
 
 This how to use instructions assumes that the [Install Intructions](install.md) have been followed, including the
 [Bash Script Alias](install.md#bash-script-alias) creation.

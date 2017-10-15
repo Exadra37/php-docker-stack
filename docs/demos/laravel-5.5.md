@@ -1,6 +1,6 @@
 # PHP7 DOCKER STACK DEMO FOR LARAVEL 5.5
 
-Let's see how easy is to start a Laravel 5.5 project with Php7 Docker Stack.
+Let's see how easy is to start a Laravel 5.5 project with Php Docker Stack.
 
 Required to run this demo:
 
@@ -35,21 +35,21 @@ dkcomposer --php 7.0 create-project laravel/laravel:5.5.0 && cd laravel
 dkcomposer --php 7.0 require predis/predis:v1.1.1  elasticsearch/elasticsearch:v5.3.0
 ```
 
-## Install Php7 Docker Stack
+## Install Php Docker Stack
 
-Requiring Php7 Docker Stack as a dev dependency...
+Requiring Php Docker Stack as a dev dependency...
 
 ##### Type in Shell
 
 ```bash
-dkcomposer --php 7.0 require --dev exadra37-docker-compose/php7-docker-stack
+dkcomposer --php 7.0 require --dev exadra37-docker/php-docker-stack
 ```
 
 Before we continue please follow [this instructions](./../how-to-bash-script-alias) in order to
 create a bash alias for you shell.
 
 Now that we have the bash alias `server` for `./vendor/bin/server` let's try
-running Laravel on a Php7 Docker Stack...
+running Laravel on a Php Docker Stack...
 
 > **NOTE:** If you prefer to not create the bash alis then just replace all
 occurrences of `server` by `./vendor/bin/server`.
@@ -58,26 +58,7 @@ occurrences of `server` by `./vendor/bin/server`.
 ## Running Laravel
 
 
-### The Env File
-
-Before we run Laravel we need to prepare some environment variables...
-
-Open `.env` file in you text editor...
-
-#### Env vars to update:
-
-* `DB_HOST=127.0.0.1` to `DB_HOST=database`
-* `CACHE_DRIVER=file` to `CACHE_DRIVER=redis`
-* `SESSION_DRIVER=file` to `SESSION_DRIVER=redis`
-* `QUEUE_DRIVER=sync` to `QUEUE_DRIVER=beanstalkd`
-* `REDIS_HOST=127.0.0.1` to `REDIS_HOST=cache`
-
-#### Env vars to add:
-
-* `HTTP_PORT_MAP=8888:80`
-
-
-### Server Upl
+### Server Up
 
 ##### Type in Shell:
 
@@ -85,9 +66,9 @@ Open `.env` file in you text editor...
 server up http
 ```
 
-### Visit Browser
+### Open In Browser
 
-Now visit the browser on http://localhost:8888 and you should see the Laravel Home page.
+Now visit the browser on http://localhost:8000 and you should see the Laravel Home page.
 
 
 ### Enable Authentication
@@ -134,3 +115,94 @@ Migrated:  2014_10_12_100000_create_password_resets_table
 Visit now the browser on http://localhost:8888/register to create an account.
 
 
+## Logs
+
+To see a demo of the Docker Log Stack being used in Laravel we need to open the
+file `public/index.php` and add some code to it.
+
+### Step 1
+
+#### Look for line:
+
+```php
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+```
+
+### Step 2
+
+#### Add after line found in step 1:
+
+```php
+/*
+|--------------------------------------------------------------------------
+| Configure Monolog
+|--------------------------------------------------------------------------
+*/
+
+use Monolog\Logger;
+use Predis\Client as Redis;
+use Monolog\Handler\RedisHandler;
+use Illuminate\Log\Writer as Log;
+use Illuminate\Config\Repository as Config;
+use Monolog\Formatter\LogstashFormatter;
+
+$config = $app->make(Config::class);
+$monolog = $app->make(Log::class)->getMonolog();
+
+$redis = new Redis([
+    'scheme' => 'tcp',
+    'host'   => 'cache',
+    'port'   => 6379,
+]);
+
+$redisHandler = new RedisHandler($redis, 'php_logs');
+$formatter = new LogstashFormatter('php-docker-stack', 'server-name', null, 'ctx_', 0);
+$redisHandler->setFormatter($formatter);
+$monolog->pushHandler($redisHandler);
+
+\Log::info('Server Request', $_SERVER);
+
+/** Ends Monolog Configuration */
+```
+
+>**ALERT**:
+>   → This code is not intended for use in production, just for this demo.
+
+
+### Step 3
+
+Refresh your current Laravel page with `F5`.
+
+
+### Step 4
+
+Visit http://localhost:5601.
+
+A login page for Kibana should be visible now.
+
+#### Login Credentials
+
+* user - elastic
+* password - changeme
+
+>**ATTENTION**:
+>   → never use this credentials in production, unless you are asking for trouble.
+
+
+#### Create Kibana Index
+
+After the login a **Welcome to X-Pack!** page will appear, now to create the
+Kibana index we just need to click in the bottom of the page in button **Create**.
+
+
+#### Viewing the Logs
+
+In the the left pane of the page(the blue one), click in **Discover** and you
+should see now the first log created when you have refreshed the Laravel page in
+step 3.
+
+>**NOTE**:
+>   → This is a Kibana community version, thus free to use, but once it includes
+>      X-Pack it requires to [subscribe](https://www.elastic.co/subscriptions) a free plan for continuous usage.
