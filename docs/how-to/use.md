@@ -2,8 +2,8 @@
 
 Any developer with zero experience of Docker can take advantage of Php Docker Stack work-flow.
 
-This how to use instructions assumes that the [Install Intructions](install.md) have been followed, including the
-[Bash Script Alias](install.md#bash-script-alias) creation.
+This how to use instructions assumes that the [Install Instructions](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/install.md) have been followed, including the
+[Bash Script Alias](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs//how-to/install.md#bash-script-alias) creation.
 
 Users with knowledge of using the `docker-compose` command can take advantage of all is capabilities, once `server` is
 only an alias to it.
@@ -86,6 +86,6 @@ To go out of the shell in the container just type `exit`.
 
 ---
 
-[<< previous](install.md) | [next >>](./../../CONTRIBUTING.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/install.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/CONTRIBUTING.md)
 
-[HOME](./../../README.md)
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)

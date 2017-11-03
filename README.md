@@ -10,26 +10,26 @@ From now on, no need to keep messing around the Operating System to have a full 
 ## MENU
 
 * **The Package**
-    + [Why Exists?](./docs/the-package/why_exists.md)
-    + [What Is It?](./docs/the-package/what_is_it.md)
-    + [When To use It?](./docs/the-package/when_to_use_it.md)
+    + [Why Exists?](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/why_exists.md)
+    + [What Is It?](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/what_is_it.md)
+    + [When To use It?](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/when_to_use_it.md)
 * **How To**
-    + [Install](./docs/how-to/install.md)
-    + [Use](./docs/how-to/use.md)
-    + [Report an Issue](./docs/how-to/create_an_issue.md)
-    + [Create a Branch](./docs/how-to/create_branches.md)
-    + [Open a Merge Request](./docs/how-to/create_a_merge_request.md)
-    + [Uninstall](./docs/how-to/uninstall.md)
+    + [Install](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/install.md)
+    + [Use](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/use.md)
+    + [Report an Issue](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_an_issue.md)
+    + [Create a Branch](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_branches.md)
+    + [Open a Merge Request](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_a_merge_request.md)
+    + [Uninstall](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/uninstall.md)
 * **Demos**
-    + [Laravel 5.5](./docs/demos/laravel-5.5.md)
+    + [Laravel 5.5](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/demos/laravel-5.5.md)
 * **Road Map**
     + [Milestones](https://gitlab.com/exadra37-docker/php/docker-stack/milestones)
     + [Overview](https://gitlab.com/exadra37-docker/php/docker-stack/boards)
 * **About**
-    + [Author](AUTHOR.md)
-    + [Contributors](CONTRIBUTORS.md)
-    + [Contributing](CONTRIBUTING.md)
-    + [License](LICENSE)
+    + [Author](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/AUTHOR.md)
+    + [Contributors](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/CONTRIBUTORS.md)
+    + [Contributing](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/CONTRIBUTING.md)
+    + [License](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/LICENSE)
 
 
 ## SUPPORT DEVELOPMENT
@@ -47,7 +47,7 @@ This repository uses [Explicit Versioning](https://gitlab.com/exadra37-versionin
 
 ## BRANCHES
 
-Branches are created as demonstrated [here](docs/how-to/create_branches.md).
+Branches are created as demonstrated [here](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_branches.md).
 
 This are the type of branches we can see at any moment in the repository:
 

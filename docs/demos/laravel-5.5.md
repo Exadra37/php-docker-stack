@@ -45,13 +45,13 @@ Requiring Php Docker Stack as a dev dependency...
 dkcomposer --php 7.0 require --dev exadra37-docker/php-docker-stack
 ```
 
-Before we continue please follow [this instructions](./../how-to-bash-script-alias) in order to
-create a bash alias for you shell.
+Before we continue please follow [this instructions](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/install.md#bash-script-alias) in order to
+create a bash alias for your shell.
 
 Now that we have the bash alias `server` for `./vendor/bin/server` let's try
 running Laravel on a Php Docker Stack...
 
-> **NOTE:** If you prefer to not create the bash alis then just replace all
+> **NOTE:** If you don't want to create the bash alias then just replace all
 occurrences of `server` by `./vendor/bin/server`.
 
 
@@ -206,3 +206,8 @@ step 3.
 >**NOTE**:
 >   → This is a Kibana community version, thus free to use, but once it includes
 >      X-Pack it requires to [subscribe](https://www.elastic.co/subscriptions) a free plan for continuous usage.
+
+
+---
+
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)

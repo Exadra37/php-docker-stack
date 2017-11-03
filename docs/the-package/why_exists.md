@@ -19,7 +19,7 @@ Using Docker is precisely to avoid the above type of commentaries.
 
 ---
 
-[<< previous](./../../README.md) | [next >>](what_is_it.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/what_is_it.md)
 
-[HOME](./../../README.md)
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)
 

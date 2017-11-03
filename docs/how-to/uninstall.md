@@ -23,6 +23,6 @@ Please [give us feedback](https://gitlab.com/exadra37-docker/php/docker-stack/is
 
 ---
 
-[<< previous](create_a_merge_request.md) | [next >>](./../../AUTHOR.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs//how-to/create_a_merge_request.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/AUTHOR.md)
 
-[HOME](./../../README.md)
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)

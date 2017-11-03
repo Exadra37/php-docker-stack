@@ -27,6 +27,6 @@ https://exadra37.com
 
 ---
 
-[<< previous](./docs/how-to/uninstall.md) | [next >>](CONTRIBUTORS.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/uninstall.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/CONTRIBUTORS.md)
 
-[HOME](./../../README.md)
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)

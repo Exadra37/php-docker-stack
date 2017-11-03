@@ -95,6 +95,6 @@ We should now see the same output from when we run `./vendor/bin/server --help`.
 
 ---
 
-[<< previous](./../the-package/why_exists.md) | [next >>](use.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/why_exists.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/use.md)
 
-[HOME](./../../README.md)
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)

@@ -14,7 +14,7 @@ discussion for the ones you can help.
 ### In a new Issue
 
 If you have a new issue to report, please [create it](https://gitlab.com/exadra37-docker/php/docker-stack/issues/new) by
-following the applicable [issue guidelines](docs/how-to/create_an_issue.md).
+following the applicable [issue guidelines](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_an_issue.md).
 
 
 ### Solving an Issue
@@ -25,11 +25,11 @@ After an agreement is achieved the issue will be assigned to you.
 
 Now is time to fork the repository and start coding on it.
 
-When you are ready to merge it, please proceed as per this [Merge Requests Guidelines](docs/how-to/create_a_merge_request.md).
+When you are ready to merge it, please proceed as per this [Merge Requests Guidelines](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_a_merge_request.md).
 
 
 ---
 
-[<< previous](./docs/how-to/use.md) | [next >>](./docs/how-to/create_an_issue.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/use.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_an_issue.md)
 
-[HOME](./../../README.md)
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)

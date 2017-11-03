@@ -12,7 +12,7 @@ All optional topics not used must maintain their title and have their body repla
 
 When any created issue do not follow this guidelines it will not be considered.
 
-Each issue will have is own Branch that are created as demonstrated [here](create_branches.md).
+Each issue will have is own Branch that are created as demonstrated [here](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_branches.md).
 
 
 ## Bug Fix / Security Fix
@@ -40,6 +40,6 @@ Create each issue [here](https://gitlab.com/exadra37-docker/php/docker-stack/iss
 
 ---
 
-[<< previous](./../../CONTRIBUTING.md) | [next >>](create_branches.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/CONTRIBUTING.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_branches.md)
 
-[HOME](./../../README.md)
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)

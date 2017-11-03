@@ -10,6 +10,6 @@ way to go.
 
 ---
 
-[<< previous](what_is_it.md) | [next >>](./../how-to/install.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/what_is_it.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/install.md)
 
-[HOME](./../../README.md)
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)

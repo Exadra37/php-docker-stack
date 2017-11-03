@@ -9,6 +9,6 @@ All optional topics not used must maintain their title and have their body repla
 
 ---
 
-[<< previous](create_branches.md) | [next >>](./../../AUTHOR.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/create_branches.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/AUTHOR.md)
 
-[HOME](./../../README.md)
+[HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)
