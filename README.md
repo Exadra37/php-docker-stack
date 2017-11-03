@@ -51,14 +51,10 @@ Branches are created as demonstrated [here](https://gitlab.com/exadra37-docker/p
 
 This are the type of branches we can see at any moment in the repository:
 
-* `master` - issues and milestones branches will be merged here. Don't use it in
-              production.
-* `last-stable-release` - matches the last stable tag created. Useful for
-                           automation tools. Doesn't guarantee backwards
-                           compatibility.
+* `master` - issues and milestones branches will be merged here. Don't use it in production.
+* `last-stable-release` - matches the last stable tag created. Useful for automation tools. Doesn't guarantee backwards compatibility.
 * `4-fix-some-bug` - each issue will have is own branch for development.
-* `milestone-12_add-some-new-feature` - all Milestone issues will start, tracked and merged
-                             here.
+* `milestone-12_add-some-new-feature` - all Milestone issues will start, tracked and merged here.
 
 Only `master` and `last-stable-release` branches will be permanent ones in the
 repository and all other ones will be removed once they are merged.

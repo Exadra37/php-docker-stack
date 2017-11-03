@@ -112,7 +112,7 @@ Migrating: 2014_10_12_100000_create_password_resets_table
 Migrated:  2014_10_12_100000_create_password_resets_table
 ```
 
-Visit now the browser on http://localhost:8888/register to create an account.
+Visit now the browser on http://localhost:8000/register to create an account.
 
 
 ## Logs

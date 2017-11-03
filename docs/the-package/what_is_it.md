@@ -37,7 +37,7 @@ This means we can choose the image that best suites our needs to attach to each 
 
 ---
 
-[<< previous]https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/why_exists.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/when_to_use_it.md)
+[<< previous](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/why_exists.md) | [next >>](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/the-package/when_to_use_it.md)
 
 [HOME](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/README.md)
 
