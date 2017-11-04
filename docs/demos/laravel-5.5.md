@@ -37,7 +37,7 @@ dkcomposer --php 7.0 require predis/predis:v1.1.1  elasticsearch/elasticsearch:v
 
 ## Install Php Docker Stack
 
-Requiring Php Docker Stack as a dev dependency...
+Until we reach version `1.0.0.0` we  must require only as a `dev` dependency and we need to add to our `composer.json` this line `"minimum-stability": "dev"`.
 
 ##### Type in Shell
 

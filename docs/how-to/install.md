@@ -13,7 +13,7 @@ Php Docker Stack is easy to install in any Php App using composer to manage thei
 
 ## Using Composer
 
-Until we reach version `1.0.0.0` we  must require only as a `dev` dependency.
+Until we reach version `1.0.0.0` we  must require only as a `dev` dependency and we need to add to our `composer.json` this line `"minimum-stability": "dev"`.
 
 ##### Type in the shell:
 
