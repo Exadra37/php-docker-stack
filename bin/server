@@ -92,6 +92,8 @@ set -e
     # TODO: Maybe accept them as optional arguments?
     env_file=".env"
     docker_compose_file="vendor/exadra37-docker/php-docker-stack/src/docker-compose.yml"
+    app_name="$(Get_App_Name "${env_file}")"
+    project_identifier="${PWD##*/}_${app_name}"
 
     if [ -z "${1}" ]
         then
@@ -105,7 +107,7 @@ set -e
                     Show_Help "${script_dir}"
                     ;;
                 --setup-docker-stack)
-                    Setup_Docker_Stack "${host_dir_env_vars}" "${env_file}" "${docker_compose_file}"
+                    Setup_Docker_Stack "${host_dir_env_vars}" "${env_file}" "${docker_compose_file}" "${project_identifier}"
                     exit 0
                     ;;
                 --update-docker-images)
@@ -150,7 +152,7 @@ set -e
     #  to run when the required docker image needs to be build locally.
     if [ ! -d ./docker ]
         then
-            Setup_Docker_Stack "${host_dir_env_vars}" "${env_file}" "${docker_compose_file}"
+            Setup_Docker_Stack "${host_dir_env_vars}" "${env_file}" "${docker_compose_file}" "${project_identifier}"
     fi
 
     # By default we pull docker images on each server up or server run
@@ -175,7 +177,7 @@ set -e
     #
     # we want to use the App root as the project directory for docker-compose so that he can read the .env file.
     "${sudo_prefix}" docker-compose \
-        -p "$(Get_App_Name "${env_file}")" \
+        -p "${project_identifier}" \
         --project-directory "${PWD}" \
         --file "${docker_compose_file}" \
         "${@}"
