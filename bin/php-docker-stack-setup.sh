@@ -59,6 +59,7 @@ set -e
     function Set_Env_Vars()
     {
         local _env_file="${1?}"
+        local _project_identifier="${2?}"
 
         printf "\n---> SETUP ENVIRONMENT VARIABLES IN ENV FILE\n"
 
@@ -77,6 +78,7 @@ set -e
         printf "\nSESSION_DRIVER=redis" >> "${_env_file}"
         printf "\nQUEUE_DRIVER=beanstalkd" >> "${_env_file}"
         printf "\nREDIS_HOST=cache" >> "${_env_file}"
+        printf "\nDATABASE_VOLUME_MAP=~/.php-docker-stack/${_project_identifier}/services/database/volumes/mysql:/var/lib/mysql" >> "${_env_file}"
 
         # TODO: Only map to port 8000 if no service listening on port 80.
         printf "\nHTTP_PORT_MAP=8000:80" >> "${_env_file}"
@@ -92,8 +94,9 @@ set -e
         local _host_dir_env_vars="${1?}"
         local _env_file="${2?}"
         local _docker_compose_file="${3?}"
+        local _project_identifier="${4?}"
 
         Create_Default_Host_Dirs_From_Env_Vars "${_host_dir_env_vars}" "${_env_file}" "${_docker_compose_file}"
         Copy_Docker_Dir_To_Project_Root
-        Set_Env_Vars "${_env_file}"
+        Set_Env_Vars "${_env_file}" "${_project_identifier}"
     }
