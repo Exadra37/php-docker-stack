@@ -2,10 +2,7 @@
 
 Let's see how easy is to start a Laravel 5.5 project with Php Docker Stack.
 
-Required to run this demo:
-
-* A docker version equal or greater than 1.12.0.
-* Docker Composer in a version equal or greater than `2.1`.
+To run this demo please ensure that you comply with [this minimal requirements](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/install.md#requirements).
 
 > **NOTE:** Please note that this demo is aimed for a 100% docker work-flow,
 thus is not necessary to have installed Apache, Nginx, Mysql or any other

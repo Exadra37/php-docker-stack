@@ -9,6 +9,24 @@ Php Docker Stack is easy to install in any Php App using composer to manage thei
    [follow this instructions](https://docs.docker.com/engine/installation/).
 * Docker Composer in a version equal or greater than `2.1`. To install Docker
    Compose please [follow this instructions](https://docs.docker.com/compose/install/).
+* By default Elasticsearch is being used as part of the log stack, thus we need to set the `vm.max_map_count` in our host:
+
+    + For current session:
+
+        ```bash
+        sudo sysctl -w vm.max_map_count=262144
+        ```
+    + To persist after reboot
+
+        ```bash
+        sudo sh -c "echo vm.max_map_count=262144 > /etc/sysctl.d/99-max_map_count.conf"
+        ```
+
+> NOTE:
+>
+>   * Above shell commands need to run with root priveleges.
+>   * Depending on your sytem you may need or not to use `sudo` to obtain root privileges.
+
 
 
 ## Using Composer
