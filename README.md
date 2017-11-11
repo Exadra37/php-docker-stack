@@ -22,6 +22,8 @@ From now on, no need to keep messing around the Operating System to have a full 
     + [Uninstall](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/uninstall.md)
 * **Demos**
     + [Laravel 5.5](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/demos/laravel-5.5.md)
+* **Troubleshooting**
+    + [Kibana Login](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/troubleshooting/kibana/login.md)
 * **Road Map**
     + [Milestones](https://gitlab.com/exadra37-docker/php/docker-stack/milestones)
     + [Overview](https://gitlab.com/exadra37-docker/php/docker-stack/boards)
