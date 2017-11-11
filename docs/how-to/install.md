@@ -45,7 +45,7 @@ composer require --dev exadra37-docker/php-docker-stack
 ##### Type in the shell:
 
 ```bash
-mkdir -p vendor/exadra37-docker && git clone https://gitlab.com/exadra37-docker/php/docker-stack.git vendor/exadra37-docker/php-docker-stack && ln -s ./../exadra37-docker/php-docker-stack/bin/server ./vendor/bin/server
+mkdir -p vendor/{exadra37-docker,bin} && git clone https://gitlab.com/exadra37-docker/php/docker-stack.git vendor/exadra37-docker/php-docker-stack && ln -s ./../exadra37-docker/php-docker-stack/bin/server ./vendor/bin/server
 ```
 
 
