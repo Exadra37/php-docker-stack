@@ -1,0 +1,7 @@
+Dummy file to be used when we want to suppress some map in the docker compose file.
+
+So to suppress the map we only need to add the map into our .env file.
+
+Example:
+
+PHP_CONFIG_VOLUME_MAP=./docker/.suppress-default-map:/.suppress-default-map
