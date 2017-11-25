@@ -34,12 +34,12 @@ dkcomposer --php 7.0 require predis/predis:v1.1.1  elasticsearch/elasticsearch:v
 
 ## Install Php Docker Stack
 
-Until we reach version `1.0.0.0` we  must require only as a `dev` dependency and we need to add to our `composer.json` this line `"minimum-stability": "dev"`.
+Until we reach version `1.0.0.0` we must require only as a `dev` dependency.
 
 ##### Type in Shell
 
 ```bash
-dkcomposer --php 7.0 require --dev exadra37-docker/php-docker-stack
+dkcomposer --php 7.0 require --dev exadra37-docker/php-docker-stack:@dev
 ```
 
 Before we continue please follow [this instructions](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/install.md#bash-script-alias) in order to

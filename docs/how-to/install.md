@@ -36,7 +36,7 @@ Until we reach version `1.0.0.0` we  must require only as a `dev` dependency and
 ##### Type in the shell:
 
 ```bash
-composer require --dev exadra37-docker/php-docker-stack
+composer require --dev exadra37-docker/php-docker-stack:@dev
 ```
 
 
