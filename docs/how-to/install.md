@@ -24,20 +24,35 @@ Php Docker Stack is easy to install in any Php App using composer to manage thei
 
 > NOTE:
 >
->   * Above shell commands need to run with root priveleges.
->   * Depending on your sytem you may need or not to use `sudo` to obtain root privileges.
-
+> → Above shell commands need to run with root priveleges.  
+> → Depending on your sytem you may need or not to use `sudo` to obtain root privileges.
 
 
 ## Using Composer
 
-Until we reach version `1.0.0.0` we  must require only as a `dev` dependency and we need to add to our `composer.json` this line `"minimum-stability": "dev"`.
+Until we reach version `1.0.0.0` we  must require only as a `dev` dependency.
 
-##### Type in the shell:
+### From Docker Container
+
+In order to avoid typing in each composer command `sudo docker run --rm -it -v $PWD/home/composer/app exadra37/php7-composer:php-7.1`
+we just need to follow [this instructions](https://gitlab.com/exadra37-docker-images/php7/composer/blob/latest/docs/how-to/install.md#bash-script-alias) to install
+a simple bash script in `~/home/$USER/bin` that will allow us to invoke it using
+only `dkcomposer`.
+
+> **NOTE:** 
+>
+> → If you prefer to not install the bash script alias than, just replace any occurrence of `dkcomposer` by `sudo docker run --rm -it -v $PWD/home/composer/app exadra37/php7-composer:php-7.1`.
+
+##### Type in Shell
 
 ```bash
-composer require --dev exadra37-docker/php-docker-stack:@dev
+dkcomposer --php 7.1 require --dev exadra37-docker/php-docker-stack:@dev
 ```
+
+### Advantages of using composer from Docker Container instead from Localhost:
+
+* guarantees we run composer in the same Php version used by our Php App.
+* packages that are sensitive to the Php version are installed in the correct version.
 
 
 ## Using Git

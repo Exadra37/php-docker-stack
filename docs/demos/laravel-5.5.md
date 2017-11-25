@@ -2,44 +2,73 @@
 
 Let's see how easy is to start a Laravel 5.5 project with Php Docker Stack.
 
+
+## Requirements 
+
+### Docker Requirements
+
 To run this demo please ensure that you comply with [this minimal requirements](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/install.md#requirements).
 
-> **NOTE:** Please note that this demo is aimed for a 100% docker work-flow,
-thus is not necessary to have installed Apache, Nginx, Mysql or any other
-dependency than the Docker ones.
+> **NOTE:**
+>
+> → Please note that this demo is aimed for a 100% docker work-flow, thus is not necessary to have installed Php Composer, Apache, Nginx, Mysql or any other dependency than the Docker ones.
 
 
-## Create the Laravel Project
+### Php Composer Requirements
 
-Let's install first Laravel 5.5 by using a docker composer image for php7.
+We will use Composer for Php from a Docker Container with the same Php Version we want to run our Php App.
 
-In order to avoid type in each composer command `sudo docker run --rm -it -v $PWD/home/composer/app exadra37/php7-composer:php-7.0`
+In order to avoid typing in each php composer command `sudo docker run --rm -it -v $PWD/home/composer/app exadra37/php7-composer:php-7.1`
 we just need to follow [this instructions](https://gitlab.com/exadra37-docker-images/php7/composer/blob/latest/docs/how-to/install.md#bash-script-alias) to install
 a simple bash script in `~/home/$USER/bin` that will allow us to invoke it using
-only `dkcompoer`.
+only `dkcomposer`.
 
-> **NOTE:** If you prefer to not install the bash script alias than, just
-replace any occurrence of `dkcomposer` by `sudo docker run --rm -it -v $PWD/home/composer/app exadra37/php7-composer:php-7.0`.
+> **NOTE:**
+>
+> → If you prefer to not install the bash script alias than, just
+replace any occurrence of `dkcomposer` by `sudo docker run --rm -it -v $PWD/home/composer/app exadra37/php7-composer:php-7.1`.
 
+
+## Creates the Laravel Project
+
+Time to use `dkcomposer` to create a Laravel 5.5 project...
 
 ##### Type in Shell
 
 ```bash
-dkcomposer --php 7.0 create-project laravel/laravel:5.5.0 && cd laravel
+dkcomposer --php 7.1 create-project laravel/laravel:5.5.0 && cd laravel
 ```
+
+#### The Env File
+
+Please open the `.env` file and comment out the following env vars:
 
 ```bash
-dkcomposer --php 7.0 require predis/predis:v1.1.1  elasticsearch/elasticsearch:v5.3.0
+#DB_HOST=127.0.0.1
+#REDIS_HOST=127.0.0.1
+#CACHE_DRIVER=file
+#SESSION_DRIVER=file
+#QUEUE_DRIVER=sync
 ```
 
-## Install Php Docker Stack
+>**NOTE**:
+>
+> → This is a temporary solution until it is automated from a bash script.
+
+### Installs Dependencies
+
+```bash
+dkcomposer --php 7.1 require predis/predis:v1.1.1  elasticsearch/elasticsearch:v5.3.0
+```
+
+## Installs Php Docker Stack
 
 Until we reach version `1.0.0.0` we must require only as a `dev` dependency.
 
 ##### Type in Shell
 
 ```bash
-dkcomposer --php 7.0 require --dev exadra37-docker/php-docker-stack:@dev
+dkcomposer --php 7.1 require --dev exadra37-docker/php-docker-stack:@dev
 ```
 
 Before we continue please follow [this instructions](https://gitlab.com/exadra37-docker/php/docker-stack/blob/master/docs/how-to/install.md#bash-script-alias) in order to
@@ -48,8 +77,9 @@ create a bash alias for your shell.
 Now that we have the bash alias `server` for `./vendor/bin/server` let's try
 running Laravel on a Php Docker Stack...
 
-> **NOTE:** If you don't want to create the bash alias then just replace all
-occurrences of `server` by `./vendor/bin/server`.
+> **NOTE:** 
+>
+> → If you don't want to create the bash alias then just replace all occurrences of `server` by `./vendor/bin/server`.
 
 
 ## Running Laravel
@@ -165,6 +195,7 @@ $monolog->pushHandler($redisHandler);
 ```
 
 >**ALERT**:
+>
 >   → This code is not intended for use in production, just for this demo.
 
 
@@ -185,7 +216,8 @@ A login page for Kibana should be visible now.
 * password - changeme
 
 >**ATTENTION**:
->   → never use this credentials in production, unless you are asking for trouble.
+>   
+> → never use this credentials in production, unless you are asking for trouble.
 
 
 #### Create Kibana Index
@@ -201,8 +233,8 @@ should see now the first log created when you have refreshed the Laravel page in
 step 3.
 
 >**NOTE**:
->   → This is a Kibana community version, thus free to use, but once it includes
->      X-Pack it requires to [subscribe](https://www.elastic.co/subscriptions) a free plan for continuous usage.
+>  
+> → This is a Kibana community version, thus free to use, but once it includes X-Pack it requires to [subscribe](https://www.elastic.co/subscriptions) a free plan for continuous usage.
 
 
 ---
