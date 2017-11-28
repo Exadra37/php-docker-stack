@@ -6,7 +6,7 @@ set -e
 # Sourcing
 ########################################################################################################################
 
-    script_dir=$(dirname $(readlink -f $0))
+    script_dir="${PWD}/vendor/exadra37-docker/php-docker-stack/bin"
     source "${script_dir}/sudo-exists.sh"
     source "${script_dir}/parse-env-var.sh"
     source "${script_dir}/php-docker-stack-setup.sh"

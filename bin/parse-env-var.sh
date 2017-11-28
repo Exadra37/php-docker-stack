@@ -29,7 +29,7 @@ function Parse_Env_Var_From_Docker_Compose()
     local _env_var_default_value="${_env_var_line##*:-}"
 
     # removes } from end of string
-    local _env_var_default_value="${_env_var_default_value::-1}"
+    local _env_var_default_value="${_env_var_default_value%\}*}"
 
     echo "${_env_var_default_value}"
 }
