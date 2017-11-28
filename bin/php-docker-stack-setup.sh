@@ -9,7 +9,7 @@ set -e
     function Create_Dir_If_Not_Exists()
     {
         # ~/some/dir becomes /home/username/some/dir
-        local _dir_path="${1/~\//$HOME\/}"
+        local _dir_path="${1/~\//$HOME/}"
 
         if [ -n "${_dir_path}" ] && [ ! -d "${_dir_path}" ]
             then
