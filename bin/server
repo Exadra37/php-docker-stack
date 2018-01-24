@@ -17,9 +17,16 @@ set -e
 # Defaults
 ########################################################################################################################
 
+    env_file=".env"
     sudo_prefix=$(Sudo_Prefix)
     env_vars="CACHE_IMAGE,CRON_JOBS_IMAGE,DATABASE_IMAGE,HTTP_IMAGE,LOGS_PIPELINE_IMAGE,LOGS_STORAGE_IMAGE,LOGS_DASHBOARD_IMAGE,PHP_IMAGE,QUEUE_IMAGE,DEV_CLI_IMAGE,DATABASE_CLI_IMAGE"
     host_dir_env_vars="DATABASE_VOLUME_MAP,LOGS_STORAGE_VOLUME_MAP"
+
+    # We will try to grep this file several times, thus it needs to exist to avoid grep errors.
+    if [ ! -e "${env_file}" ]
+        then
+            touch "${env_file}"
+    fi
 
 
 ########################################################################################################################
@@ -90,7 +97,6 @@ set -e
 ########################################################################################################################
 
     # TODO: Maybe accept them as optional arguments?
-    env_file=".env"
     docker_compose_file="vendor/exadra37-docker/php-docker-stack/src/docker-compose.yml"
     app_name="$(Get_App_Name "${env_file}")"
     project_identifier="${PWD##*/}_${app_name}"
