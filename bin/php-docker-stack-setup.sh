@@ -96,7 +96,7 @@ set -e
         local _docker_compose_file="${3?}"
         local _project_identifier="${4?}"
 
+        Set_Env_Vars "${_env_file}" "${_project_identifier}"
         Create_Default_Host_Dirs_From_Env_Vars "${_host_dir_env_vars}" "${_env_file}" "${_docker_compose_file}"
         Copy_Docker_Dir_To_Project_Root
-        Set_Env_Vars "${_env_file}" "${_project_identifier}"
     }
