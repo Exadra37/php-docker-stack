@@ -24,8 +24,8 @@ services:
       - app_network
 
   cron-jobs:
-    build: ${CRON_JOBS_IMAGE_BUILD_DIR:-./docker/cron-jobs/php7-fpm/build}
-    image: ${CRON_JOBS_IMAGE:-exadra37/php7-fpm:latest}
+    build: ${CRON_JOBS_IMAGE_BUILD_DIR:-./docker/cron-jobs/php7-fpm/build}/${PHP_VERSION:-7.2}
+    image: ${CRON_JOBS_IMAGE:-exadra37/php7-cron-jobs}:${PHP_VERSION:-7.2}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     depends_on:
       database:
@@ -36,6 +36,15 @@ services:
         condition: service_healthy
       queue:
         condition: service_healthy
+    volumes:
+      # override from .env file like: PHP_CONFIG_VOLUME_MAP=./docker/cron-jobs/php7-fpm/build/7.2/config/default:/usr/local/etc
+      - ${CRON_JOBS_CONFIG_VOLUME_MAP:-./docker/.suppress-default-map:/.suppress-default-map}
+
+      # ./docker/cron-jobs/php7-fpm/build/7.2/config/custom/php/conf.d/zzz-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini
+      - ${CRON_JOBS_IMAGE_BUILD_DIR:-./docker/cron-jobs/php7-fpm/build}/${PHP_VERSION:-7.2}/${PHP_CUSTOM_PHP_INI_MAP:-config/custom/php/conf.d/zzz-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini}
+
+      # ./docker/cron-jobs/php7-fpm/build/7.2/config/custom/php-fpm.d/zzz-custom.conf:/usr/local/etc/php-fpm.d/zzz-custom.conf
+      - ${CRON_JOBS_IMAGE_BUILD_DIR:-./docker/cron-jobs/php7-fpm/build}/${PHP_VERSION:-7.2}/${PHP_CUSTOM_PHP_FPM_CONF_MAP:-config/custom/php-fpm.d/zzz-custom.conf:/usr/local/etc/php-fpm.d/zzz-custom.conf}
     volumes_from:
       - code
     networks:
@@ -128,8 +137,8 @@ services:
       - app_network
 
   php:
-    build: ${PHP_IMAGE_BUILD_DIR:-./docker/php/php7-fpm/build/7.1}
-    image: ${PHP_IMAGE:-exadra37/php7-fpm:7.1}
+    build: ${PHP_IMAGE_BUILD_DIR:-./docker/php/php7-fpm/build}/${PHP_VERSION:-7.2}
+    image: ${PHP_IMAGE:-exadra37/php7-fpm}:${PHP_VERSION:-7.2}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     healthcheck:
       test: "exit 0"
@@ -143,10 +152,14 @@ services:
       queue:
         condition: service_healthy
     volumes:
-      # override from .env file like: PHP_CONFIG_VOLUME_MAP=./docker/php/php7-fpm/build/7.1/config/default:/usr/local/etc
+      # override from .env file like: PHP_CONFIG_VOLUME_MAP=./docker/php/php7-fpm/build/7.2/config/default:/usr/local/etc
       - ${PHP_CONFIG_VOLUME_MAP:-./docker/.suppress-default-map:/.suppress-default-map}
-      - ${PHP_CUSTOM_PHP_INI_MAP:-./docker/php/php7-fpm/build/7.1/config/custom/php/conf.d/zzz-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini}
-      - ${PHP_CUSTOM_PHP_FPM_CONF_MAP:-./docker/php/php7-fpm/build/7.1/config/custom/php-fpm.d/zzz-custom.conf:/usr/local/etc/php-fpm.d/zzz-custom.conf}
+
+      # ./docker/php/php7-fpm/build/7.2/config/custom/php/conf.d/zzz-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini
+      - ${PHP_IMAGE_BUILD_DIR:-./docker/php/php7-fpm/build}/${PHP_VERSION:-7.2}/${PHP_CUSTOM_PHP_INI_MAP:-config/custom/php/conf.d/zzz-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini}
+
+      # ./docker/php/php7-fpm/build/7.2/config/custom/php-fpm.d/zzz-custom.conf:/usr/local/etc/php-fpm.d/zzz-custom.conf
+      - ${PHP_IMAGE_BUILD_DIR:-./docker/php/php7-fpm/build}/${PHP_VERSION:-7.2}/${PHP_CUSTOM_PHP_FPM_CONF_MAP:-config/custom/php-fpm.d/zzz-custom.conf:/usr/local/etc/php-fpm.d/zzz-custom.conf}
     volumes_from:
       - code
     networks:
@@ -168,8 +181,8 @@ services:
   ###################
 
   dev-cli:
-    build: ${DEV_CLI_IMAGE_BUILD_DIR:-./docker/dev-cli/php7-fpm/build/7.1}
-    image: ${DEV_CLI_IMAGE:-exadra37/php7-dev-cli:7.1}
+    build: ${DEV_CLI_IMAGE_BUILD_DIR:-./docker/dev-cli/php7-fpm/build}/${PHP_VERSION:-7.2}
+    image: ${DEV_CLI_IMAGE:-exadra37/php7-dev-cli}:${PHP_VERSION:-7.2}
     working_dir: ${CONTAINER_CODE_DIR:-/var/www}
     depends_on:
       database:
@@ -183,10 +196,17 @@ services:
       queue:
         condition: service_healthy
     volumes:
+      # /home/$USER/.ssh:/home/php-fpm/.ssh
       - ${DEV_CLI_SSH_VOLUME_MAP:-~/.ssh:/home/php-fpm/.ssh}
+
+      # /home/$USER/.gitconfig:/home/php-fpm/.gitconfig
       - ${DEV_CLI_GIT_CONFIG_VOLUME_MAP:-~/.gitconfig:/home/php-fpm/.gitconfig}
-      - ${DEV_CLI_CUSTOM_PHP_INI_MAP:-./docker/dev-cli/php7-fpm/build/7.1/config/custom/php/conf.d/zzz-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini}
-      - ${DEV_CLI_CUSTOM_PHP_FPM_CONF_MAP:-./docker/dev-cli/php7-fpm/build/7.1/config/custom/php-fpm.d/zzz-custom.conf:/usr/local/etc/php-fpm.d/zzz-custom.conf}
+
+      # ./docker/dev-cli/php7-fpm/build/7.2/config/custom/php/conf.d/zzz-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini
+      - ${DEV_CLI_IMAGE_BUILD_DIR:-./docker/dev-cli/php7-fpm/build}/${PHP_VERSION:-7.2}/${DEV_CLI_CUSTOM_PHP_INI_MAP:-config/custom/php/conf.d/zzz-custom.ini:/usr/local/etc/php/conf.d/zzz-custom.ini}
+
+      # ./docker/dev-cli/php7-fpm/build/7.2/config/custom/php-fpm.d/zzz-custom.conf:/usr/local/etc/php-fpm.d/zzz-custom.conf
+      - ${DEV_CLI_IMAGE_BUILD_DIR:-./docker/dev-cli/php7-fpm/build}/${PHP_VERSION:-7.2}/${DEV_CLI_CUSTOM_PHP_FPM_CONF_MAP:-config/custom/php-fpm.d/zzz-custom.conf:/usr/local/etc/php-fpm.d/zzz-custom.conf}
     volumes_from:
       - code
     networks:
